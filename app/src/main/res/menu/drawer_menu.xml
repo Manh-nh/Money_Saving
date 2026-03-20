@@ -1,0 +1,27 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group >
+        <item
+            android:id="@+id/statistics"
+            android:icon="@drawable/ic_statistics"
+            android:title="Statistics" />
+
+        <item
+            android:id="@+id/nav_budget"
+            android:icon="@drawable/ic_budget"
+            android:title="Budget" />
+
+        <item
+            android:id="@+id/nav_currency"
+            android:icon="@drawable/ic_currency"
+            android:title="Currency" />
+
+        <item
+            android:id="@+id/nav_language"
+            android:icon="@drawable/ic_language"
+            android:title="Language" />
+
+    </group>
+
+
+</menu>
