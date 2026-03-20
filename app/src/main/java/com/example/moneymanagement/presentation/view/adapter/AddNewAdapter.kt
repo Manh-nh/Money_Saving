@@ -10,6 +10,7 @@ import com.example.moneymanagement.presentation.view.addnewloanfragment.AddNewLo
 class AddNewAdapter(fragment: FragmentActivity) : FragmentStateAdapter(fragment) {
     override fun createFragment(position: Int): Fragment {
 
+
         return when (position) {
             0 -> AddNewExpendFragment()
             1 -> AddNewIncomeFragment()
