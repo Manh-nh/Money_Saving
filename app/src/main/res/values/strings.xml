@@ -1,4 +1,15 @@
 <resources>
     <string name="app_name">Money Management</string>
     <string name="save_money"> Money Saving</string>
+    <string name="next">Next</string>
+    <string name="start">Start</string>
+    <string name="title1">Financial management</string>
+    <string name="title2">Expense analysis chart</string>
+    <string name="title3">Expense classification</string>
+    <string name="title4">Debt management</string>
+    <string name="content1">Smart expense tracking, easy to manage</string>
+    <string name="content2">Smart chart for monthly financial management reporting</string>
+    <string name="content3">Clear income classification with six recommended spending jars.</string>
+    <string name="content4">Loans are clearly and tightly categorized.</string>
+    <string name="currercy">Currercy</string>
 </resources>

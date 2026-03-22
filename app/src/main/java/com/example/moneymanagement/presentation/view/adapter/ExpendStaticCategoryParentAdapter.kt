@@ -45,7 +45,10 @@ class ExpendStaticCategoryParentAdapter(
         fun bindView(item: StaticCategoryParentModel) {
             binding.date.text = item.date
 
-            val adapter = ExpendStaticCategoryChildAdapter(item.list)
+            val adapter =
+               ExpendStaticCategoryChildAdapter(
+                    item.list
+                )
             binding.lstStaticCategory.adapter = adapter
 
             binding.lstStaticCategory.setRecycledViewPool(viewPool)

@@ -7,59 +7,79 @@
     android:background="@drawable/bg_bottom_sheet"
     android:orientation="vertical">
 
+    <View
+        android:layout_width="@dimen/_40sdp"
+        android:layout_height="@dimen/_4sdp"
+        android:layout_gravity="center"
+        android:layout_marginTop="@dimen/_8sdp"
+        android:background="#E0E0E0" />
+
     <TextView
         android:id="@+id/txtBudget"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:fontFamily="@font/urbanist_600"
-        android:text="Budget"
+        android:layout_marginTop="@dimen/_20sdp"
+        android:fontFamily="@font/urbanist_700"
+        android:text="Update Jar Balance"
         android:textAlignment="center"
-        android:textColor="#772DDF"
-        android:textSize="20sp" />
+        android:textColor="@color/black"
+        android:textSize="@dimen/_16ssp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_20sdp"
+        android:fontFamily="@font/urbanist_600"
+        android:text="New Balance (đ)"
+        android:textColor="#757575"
+        android:textSize="@dimen/_10ssp" />
 
     <EditText
         android:id="@+id/edtSetMoney"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/bg_budget"
-        android:layout_marginTop="16dp"
-        android:inputType="number"
+        android:layout_marginTop="@dimen/_8sdp"
+        android:background="@drawable/bg_soft_input"
+        android:fontFamily="@font/urbanist_600"
         android:hint="0 đ"
-        android:textColor="@color/black" />
+        android:inputType="number"
+        android:padding="@dimen/_12sdp"
+        android:textColor="@color/black"
+        android:textSize="@dimen/_12ssp" />
 
-
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingTop="16dp"
-        android:layout_marginBottom="16dp"
+        android:layout_marginTop="@dimen/_24sdp"
+        android:layout_marginBottom="@dimen/_16sdp"
         android:orientation="horizontal">
 
-        <TextView
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btnCancel"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/bg_btn_cancel_button_sheet"
-            android:fontFamily="@font/urbanist_500"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/_45sdp"
+            android:layout_weight="1"
+            android:background="?attr/selectableItemBackground"
+            android:fontFamily="@font/urbanist_700"
             android:text="Cancel"
-            android:textColor="#18181B"
-            android:textSize="13sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:textAllCaps="false"
+            android:textColor="#757575"
+            android:textSize="@dimen/_12ssp" />
 
-        <TextView
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btnSave"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="16dp"
-            android:background="@drawable/bg_btn_save_button_sheet"
-            android:fontFamily="@font/urbanist_500"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/_45sdp"
+            android:layout_marginStart="@dimen/_12sdp"
+            android:layout_weight="1"
+            android:background="@drawable/bg_gradient_button"
+            android:fontFamily="@font/urbanist_700"
             android:text="Save"
+            android:textAllCaps="false"
             android:textColor="@color/white"
-            android:textSize="13sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:textSize="@dimen/_12ssp"
+            android:elevation="@dimen/_8sdp" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    </LinearLayout>
 
 </LinearLayout>

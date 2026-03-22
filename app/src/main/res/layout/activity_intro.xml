@@ -33,7 +33,7 @@
         android:layout_gravity="center"
         android:layout_marginTop="8dp"
         android:fontFamily="@font/urbanist_600"
-        android:text="next"
+        android:text="@string/next"
         android:textColor="#772DDF"
         android:textSize="16sp" />
 

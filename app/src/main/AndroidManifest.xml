@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <uses-permission android:name="android.permission.INTERNET"/>
+
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -12,23 +14,47 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MoneyManagement">
         <activity
-            android:name=".presentation.view.splashactivity.SplashActivity"
-            android:exported="true">
+            android:name=".presentation.view.activity.currency.CurrencyActivity"
+            android:exported="false"
+            android:screenOrientation="portrait"
+            />
+        <activity
+            android:name=".presentation.view.activity.splashactivity.SplashActivity"
+            android:exported="true"
+            android:screenOrientation="portrait"
+            >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".presentation.view.addnewactivity.AddNewActivity"
-            android:windowSoftInputMode="adjustPan"/>
-        <activity android:name=".presentation.view.transactionsactivity.TransactionsActivity"/>
-        <activity android:name=".presentation.view.homeactivity.HomeActivity"/>
-        <activity android:name=".presentation.view.staticactivity.StaticActivity"/>
-        <activity android:name=".presentation.view.budgetactivity.BudgetActivity"/>
-        <activity android:name=".presentation.view.budetdetailactivity.BudgetDetailActivity"/>
-        <activity android:name=".presentation.view.jardetailactivity.JarDetailActivity"/>
-        <activity android:name=".presentation.view.introactivity.IntroActivity"/>
+        <activity
+            android:name=".presentation.view.activity.addnewactivity.AddNewActivity"
+            android:windowSoftInputMode="adjustPan"
+            android:screenOrientation="portrait"
+            />
+        <activity android:name=".presentation.view.activity.transactionsactivity.TransactionsActivity"
+            android:screenOrientation="portrait"
+            />
+        <activity android:name=".presentation.view.activity.homeactivity.HomeActivity"
+            android:screenOrientation="portrait"
+            />
+        <activity android:name=".presentation.view.activity.staticactivity.StaticActivity"
+            android:screenOrientation="portrait"
+            />
+        <activity android:name=".presentation.view.activity.budgetactivity.BudgetActivity"
+            android:screenOrientation="portrait"
+            />
+        <activity android:name=".presentation.view.activity.budetdetailactivity.BudgetDetailActivity"
+            android:screenOrientation="portrait"
+            />
+        <activity android:name=".presentation.view.activity.jardetailactivity.JarDetailActivity"
+            android:screenOrientation="portrait"
+            />
+        <activity android:name=".presentation.view.activity.introactivity.IntroActivity"
+            android:screenOrientation="portrait"
+            />
     </application>
 
 </manifest>

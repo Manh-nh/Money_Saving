@@ -1,6 +1,6 @@
 package com.example.moneymanagement.presentation.view.adapter
 
-import com.example.moneymanagement.presentation.database.BudgetEntity
+import com.example.moneymanagement.presentation.database.roomdb.BudgetEntity
 
 
 interface OnClickListenerUpdateMoney {

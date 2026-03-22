@@ -3,117 +3,124 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/bg_home">
+    android:background="#F8F9FE">
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_220sdp"
+        android:background="@drawable/bg_gradient_button"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <LinearLayout
         android:id="@+id/toolBar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="24dp"
+        android:layout_marginTop="@dimen/_8sdp"
+        android:gravity="center_vertical"
         android:orientation="horizontal"
+        android:padding="@dimen/_8sdp"
         app:layout_constraintTop_toTopOf="parent">
 
         <ImageView
             android:id="@+id/btnExit"
-            android:layout_width="32dp"
-            android:layout_height="32dp"
-            android:src="@drawable/ic_back_jar" />
+            android:layout_width="@dimen/_36sdp"
+            android:layout_height="@dimen/_36sdp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:padding="@dimen/_10sdp"
+            android:src="@drawable/ic_back"
+            app:tint="@color/white" />
 
         <TextView
             android:id="@+id/txtTitleJar"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:fontFamily="@font/poppins_500"
+            android:fontFamily="@font/urbanist_700"
+            android:gravity="center"
             android:text="Necessities"
-            android:textAlignment="center"
             android:textColor="@color/white"
-            android:textSize="16sp" />
+            android:textSize="@dimen/_18ssp" />
 
         <ImageView
             android:id="@+id/btnDelete"
-            android:layout_width="32dp"
-            android:layout_height="32dp"
-            android:src="@drawable/ic_delete" />
+            android:layout_width="@dimen/_36sdp"
+            android:layout_height="@dimen/_36sdp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:padding="@dimen/_8sdp"
+            android:src="@drawable/ic_delete"
+            app:tint="@color/white" />
     </LinearLayout>
-
-    <TextView
-        android:id="@+id/totalMoneyJar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:fontFamily="@font/poppins_500"
-        android:text="5,500,000đ"
-        android:textColor="@color/white"
-        android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/toolBar" />
 
     <LinearLayout
-        android:id="@+id/containerRecycler"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginTop="72dp"
-        android:background="@drawable/bg_bottom_sheet"
+        android:id="@+id/headerContent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
         android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/totalMoneyJar">
+        app:layout_constraintTop_toBottomOf="@id/toolBar">
 
-        <LinearLayout
-            android:layout_width="match_parent"
+        <ImageView
+            android:id="@+id/imgJar"
+            android:layout_width="@dimen/_80sdp"
+            android:layout_height="@dimen/_90sdp"
+            android:scaleType="centerInside"
+            android:src="@drawable/ic_necessities" />
+
+        <TextView
+            android:id="@+id/totalMoneyJar"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:layout_marginTop="@dimen/_8sdp"
+            android:fontFamily="@font/urbanist_700"
+            android:text="5,500,000đ"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_22ssp" />
 
-            <TextView
-                android:id="@+id/txtTotalBalance"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="48dp"
-                android:layout_weight="1"
-                android:fontFamily="@font/urbanist_500"
-                android:text="Total expenditure"
-                android:textColor="#2D0D59"
-                android:textSize="14sp" />
-
-            <TextView
-                android:id="@+id/txtTotalMoney"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="48dp"
-                android:layout_marginEnd="16dp"
-                android:fontFamily="@font/urbanist_600"
-                android:text="500.000đ"
-                android:textColor="#ED3737"
-                android:textSize="14sp" />
-
-        </LinearLayout>
-
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/lstCategory"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="16dp"
-            android:orientation="vertical"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            tools:listitem="@layout/item_jar_category" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/urbanist_500"
+            android:text="Current Balance"
+            android:textColor="#E0E0E0"
+            android:textSize="@dimen/_10ssp" />
 
     </LinearLayout>
 
-    <ImageView
-        android:id="@+id/imgJar"
-        android:layout_width="120dp"
-        android:layout_height="120dp"
-        android:src="@drawable/budget_1"
-        android:translationY="60dp"
-        app:layout_constraintBottom_toTopOf="@id/containerRecycler"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/containerRecycler"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="@dimen/_24sdp"
+        app:cardBackgroundColor="@color/white"
+        app:cardCornerRadius="@dimen/_30sdp"
+        app:cardElevation="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/headerContent"
+        app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.Card.TopRounded">
+
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fillViewport="true">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="@dimen/_16sdp">
+
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/lstTransactions"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:nestedScrollingEnabled="false"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+
+            </LinearLayout>
+        </androidx.core.widget.NestedScrollView>
+
+    </com.google.android.material.card.MaterialCardView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

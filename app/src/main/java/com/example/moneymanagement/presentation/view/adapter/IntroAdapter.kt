@@ -31,7 +31,6 @@ class IntroAdapter(var data: ArrayList<IntroModel>) :
     inner class ViewHolder(val binding: ItemIntrolBinding) : RecyclerView.ViewHolder(binding.root) {
 
         fun bindView(intro: IntroModel) {
-
             binding.imgSlide.setImageResource(intro.imgIntro)
             binding.txtTitle.text = intro.titleIntro
             binding.txtContent.text = intro.contentIntro

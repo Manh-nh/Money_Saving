@@ -3,9 +3,9 @@ package com.example.moneymanagement.presentation.view.adapter
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.viewpager2.adapter.FragmentStateAdapter
-import com.example.moneymanagement.presentation.view.expendfragment.ExpendFragment
-import com.example.moneymanagement.presentation.view.incomfragment.IncomeFragment
-import com.example.moneymanagement.presentation.view.loanfragment.LoanFragment
+import com.example.moneymanagement.presentation.view.fragment.expendfragment.ExpendFragment
+import com.example.moneymanagement.presentation.view.fragment.incomfragment.IncomeFragment
+import com.example.moneymanagement.presentation.view.fragment.loanfragment.LoanFragment
 
 class HomeAdapter(activity: FragmentActivity) : FragmentStateAdapter(activity) {
 

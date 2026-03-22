@@ -45,7 +45,11 @@ class IncomeParentAdapter(
         fun bindView(itemParent: TransactionParent) {
             binding.txtDateParent.text = itemParent.date
 
-            val parentAdapter = IncomeChildAdapter(onClickListner, itemParent.date,itemParent.child )
+            val parentAdapter =IncomeChildAdapter(
+                    onClickListner,
+                    itemParent.date,
+                    itemParent.child
+                )
             binding.listHistoryChild.adapter = parentAdapter
 
             binding.listHistoryChild.setRecycledViewPool(viewPool)

@@ -13,7 +13,7 @@ import com.example.moneymanagement.databinding.DialogSelectMonthBinding
 import com.example.moneymanagement.presentation.database.model.MonthModel
 import com.example.moneymanagement.presentation.view.adapter.MonthAdapter
 import com.example.moneymanagement.presentation.view.adapter.OnClickItemMonth
-import com.example.moneymanagement.presentation.view.homeactivity.HomeViewModel
+import com.example.moneymanagement.presentation.view.activity.homeactivity.HomeViewModel
 import java.util.Calendar
 
 class SelectionYearPopup(

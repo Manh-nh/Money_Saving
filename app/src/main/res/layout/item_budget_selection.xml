@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/btnSelection"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="4dp"
+    android:orientation="horizontal"
+    android:padding="8dp"
+    android:background="@drawable/bg_soft_input">
+
+    <ImageView
+        android:id="@+id/imgBudget"
+        android:layout_width="@dimen/_28sdp"
+        android:layout_height="@dimen/_28sdp"
+        android:src="@drawable/ic_necessities" />
+
+    <TextView
+        android:id="@+id/txtNameBudget"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_marginStart="12dp"
+        android:fontFamily="@font/urbanist_500"
+        android:text="Necessities"
+        android:textColor="#18181B"
+        android:textSize="14sp" />
+
+</LinearLayout>

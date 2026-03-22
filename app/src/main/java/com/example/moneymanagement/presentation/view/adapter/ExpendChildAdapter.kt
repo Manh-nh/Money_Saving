@@ -10,7 +10,8 @@ import java.text.DecimalFormat
 class ExpendChildAdapter(
     private val data: List<TransactionChild>,
     private val date: String,
-    private val itemClick: OnClickItemTransaction) :
+    private val itemClick: OnClickItemTransaction
+) :
     RecyclerView.Adapter<ExpendChildAdapter.ViewHolder>() {
 
 

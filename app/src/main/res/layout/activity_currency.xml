@@ -1,0 +1,261 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F8F9FE"
+    android:padding="@dimen/_16sdp"
+    tools:context=".presentation.view.activity.currency.CurrencyActivity">
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_180sdp"
+        android:background="@drawable/bg_gradient_button"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <LinearLayout
+        android:id="@+id/layoutTitile"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_8sdp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:padding="@dimen/_8sdp"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/ivBack"
+            android:layout_width="@dimen/_36sdp"
+            android:layout_height="@dimen/_36sdp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:padding="@dimen/_10sdp"
+            android:src="@drawable/ic_back"
+            app:tint="@color/white" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:fontFamily="@font/urbanist_700"
+            android:gravity="center"
+            android:text="@string/currercy"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_18ssp" />
+
+        <View
+            android:layout_width="@dimen/_36sdp"
+            android:layout_height="@dimen/_36sdp" />
+    </LinearLayout>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/layoutTitile">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="@dimen/_16sdp">
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_12sdp"
+                app:cardCornerRadius="@dimen/_16sdp"
+                app:cardElevation="@dimen/_8sdp"
+                app:strokeWidth="0dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:background="@color/white"
+                    android:padding="@dimen/_16sdp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/urbanist_700"
+                        android:text="Amount to Convert"
+                        android:textColor="@color/purple_primary"
+                        android:textSize="@dimen/_14ssp" />
+
+                    <EditText
+                        android:id="@+id/edtAmount"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_12sdp"
+                        android:background="@drawable/bg_soft_input"
+                        android:hint="Enter amount"
+                        android:inputType="numberDecimal"
+                        android:padding="@dimen/_14sdp"
+                        android:textColor="@color/black"
+                        android:textColorHint="#9E9E9E"
+                        android:textSize="@dimen/_16ssp"
+                        android:fontFamily="@font/urbanist_600" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginTop="@dimen/_20sdp"
+                        android:background="#EEEEEE" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_16sdp"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <LinearLayout
+                            android:id="@+id/btnFromCurrency"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:background="@drawable/bg_soft_input"
+                            android:clickable="true"
+                            android:focusable="true"
+                            android:orientation="vertical"
+                            android:padding="@dimen/_10sdp">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/urbanist_400"
+                                android:text="From"
+                                android:textColor="#757575"
+                                android:textSize="@dimen/_10ssp" />
+
+                            <TextView
+                                android:id="@+id/tvFromCurrency"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/_2sdp"
+                                android:fontFamily="@font/urbanist_700"
+                                android:text="USD"
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/_14ssp" />
+                        </LinearLayout>
+
+                        <ImageView
+                            android:id="@+id/ivSwap"
+                            android:layout_width="@dimen/_36sdp"
+                            android:layout_height="@dimen/_36sdp"
+                            android:layout_marginHorizontal="@dimen/_8sdp"
+                            android:background="@drawable/bg_gradient_button"
+                            android:elevation="@dimen/_4sdp"
+                            android:padding="@dimen/_8sdp"
+                            android:src="@drawable/ic_drop"
+                            app:tint="@color/white"
+                            android:rotation="270" />
+
+                        <LinearLayout
+                            android:id="@+id/btnToCurrency"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:background="@drawable/bg_soft_input"
+                            android:clickable="true"
+                            android:focusable="true"
+                            android:orientation="vertical"
+                            android:padding="@dimen/_10sdp">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/urbanist_400"
+                                android:text="To"
+                                android:textColor="#757575"
+                                android:textSize="@dimen/_10ssp" />
+
+                            <TextView
+                                android:id="@+id/tvToCurrency"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/_2sdp"
+                                android:fontFamily="@font/urbanist_700"
+                                android:text="VND"
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/_14ssp" />
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btnConvert"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_50sdp"
+                android:layout_marginTop="@dimen/_24sdp"
+                android:background="@drawable/bg_gradient_button"
+                android:fontFamily="@font/urbanist_700"
+                android:text="Convert Now"
+                android:textAllCaps="false"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_14ssp"
+                android:elevation="@dimen/_4sdp" />
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/layoutResult"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_24sdp"
+                android:visibility="gone"
+                app:cardCornerRadius="@dimen/_16sdp"
+                app:cardElevation="@dimen/_4sdp"
+                app:strokeWidth="1dp"
+                app:strokeColor="#E0E0E0"
+                tools:visibility="visible">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:padding="@dimen/_20sdp"
+                    android:background="#FAFAFA">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/urbanist_600"
+                        android:text="Result"
+                        android:textColor="#757575"
+                        android:textSize="@dimen/_12ssp" />
+
+                    <TextView
+                        android:id="@+id/tvConvertedValue"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_4sdp"
+                        android:fontFamily="@font/urbanist_700"
+                        android:text="0.00 VND"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/_24ssp" />
+
+                    <TextView
+                        android:id="@+id/tvRateInfo"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_8sdp"
+                        android:fontFamily="@font/urbanist_500"
+                        android:text="1 USD = 25,445 VND"
+                        android:textColor="#4CAF50"
+                        android:textSize="@dimen/_11ssp" />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_40sdp" />
+
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

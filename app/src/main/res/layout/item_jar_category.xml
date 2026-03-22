@@ -1,51 +1,66 @@
-<?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginTop="8dp">
+    android:layout_marginVertical="@dimen/_6sdp"
+    android:layout_marginHorizontal="@dimen/_2sdp"
+    app:cardCornerRadius="@dimen/_12sdp"
+    app:cardElevation="@dimen/_2sdp"
+    app:strokeWidth="0dp">
 
-    <TextView
-        android:id="@+id/imgCategory"
-        android:layout_width="32dp"
-        android:layout_height="32dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/txtNameCategory"
-        android:layout_width="wrap_content"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
-        android:fontFamily="@font/urbanist_500"
-        android:textColor="#2D0D59"
-        android:textSize="14sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/imgCategory" />
+        android:padding="@dimen/_12sdp">
 
-    <ProgressBar
-        android:id="@+id/progressBar"
-        style="?android:attr/progressBarStyleHorizontal"
-        android:layout_width="0dp"
-        android:layout_height="8dp"
-        android:layout_marginStart="12dp"
-        android:max="100"
-        android:backgroundTint="#F8F8F8"
-        android:progressTint="#FFE68C"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/imgCategory"
-        app:layout_constraintTop_toTopOf="@id/imgCategory"
-        app:layout_constraintVertical_bias="0.3" />
+        <ImageView
+            android:id="@+id/imgCategory"
+            android:layout_width="@dimen/_32sdp"
+            android:layout_height="@dimen/_32sdp"
+            android:scaleType="centerInside"
+            android:src="@drawable/ic_necessities"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/txtTotalMoney"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:textColor="#2D0D59"
-        android:textSize="14sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/progressBar" />
+        <TextView
+            android:id="@+id/txtNameCategory"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_12sdp"
+            android:fontFamily="@font/urbanist_700"
+            android:text="Rent"
+            android:textColor="@color/black"
+            android:textSize="@dimen/_12ssp"
+            app:layout_constraintEnd_toStartOf="@id/txtTotalMoney"
+            app:layout_constraintStart_toEndOf="@id/imgCategory"
+            app:layout_constraintTop_toTopOf="@id/imgCategory" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <ProgressBar
+            android:id="@+id/progressBar"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/_6sdp"
+            android:layout_marginTop="@dimen/_6sdp"
+            android:max="100"
+            android:progress="40"
+            android:progressDrawable="@drawable/bg_progress_custom"
+            app:layout_constraintBottom_toBottomOf="@id/imgCategory"
+            app:layout_constraintEnd_toEndOf="@id/txtNameCategory"
+            app:layout_constraintStart_toStartOf="@id/txtNameCategory"
+            app:layout_constraintTop_toBottomOf="@id/txtNameCategory" />
+
+        <TextView
+            android:id="@+id/txtTotalMoney"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/urbanist_700"
+            android:text="200.000đ"
+            android:textColor="#E53935"
+            android:textSize="@dimen/_13ssp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</com.google.android.material.card.MaterialCardView>

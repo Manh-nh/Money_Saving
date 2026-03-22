@@ -21,6 +21,11 @@
             android:icon="@drawable/ic_language"
             android:title="Language" />
 
+        <item
+            android:id="@+id/nav_chatGPT"
+            android:icon="@drawable/ic_language"
+            android:title="Language" />
+
     </group>
 
 

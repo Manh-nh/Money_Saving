@@ -38,7 +38,12 @@ class ExpendParentAdapter(
         fun bindView(itemParent: TransactionParent) {
             binding.txtDateParent.text = itemParent.date
 
-            val parentAdapter = ExpendChildAdapter(itemParent.child, itemParent.date,itemClick,  )
+            val parentAdapter =
+               ExpendChildAdapter(
+                    itemParent.child,
+                    itemParent.date,
+                    itemClick,
+                )
             binding.listHistoryChild.adapter = parentAdapter
 
             binding.listHistoryChild.setRecycledViewPool(viewPool)

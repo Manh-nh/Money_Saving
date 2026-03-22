@@ -42,7 +42,9 @@ class IncomeStaticCategoryParentAdapter(
 
         fun bindView(item : StaticCategoryParentModel) {
             binding.date.text = item.date
-            val adapter = IncomeStaticCategoryChildAdapter(item.list)
+            val adapter =IncomeStaticCategoryChildAdapter(
+                    item.list
+                )
             binding.lstStaticCategory.adapter = adapter
 
             binding.lstStaticCategory.setRecycledViewPool(viewPool)

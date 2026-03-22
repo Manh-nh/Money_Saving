@@ -42,7 +42,9 @@ class LoanStaticCategoryParentAdapter(
         fun bindView(item: StaticCategoryParentModel) {
             binding.date.text = item.date
 
-            val adapter = LoanStaticCategoryChildAdapter(item.list)
+            val adapter =LoanStaticCategoryChildAdapter(
+                    item.list
+                )
             binding.lstStaticCategory.adapter = adapter
 
             binding.lstStaticCategory.setRecycledViewPool(viewPool)

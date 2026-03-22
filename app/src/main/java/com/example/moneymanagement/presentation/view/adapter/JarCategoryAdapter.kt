@@ -41,7 +41,7 @@ class JarCategoryAdapter(
         fun bindView(budget: JarCategory) {
             val totalMoney = formatMoney(budget.totalMoney)
 
-            binding.imgCategory.setBackgroundResource(budget.imgCategory)
+            binding.imgCategory.setImageResource(budget.imgCategory)
             binding.txtNameCategory.text = budget.nameCategory
             binding.txtTotalMoney.text = "$totalMoney đ"
             binding.progressBar.progress = budget.process

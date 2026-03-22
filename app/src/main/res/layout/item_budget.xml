@@ -1,79 +1,84 @@
-<?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="wrap_content"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_gravity="center"
-    android:gravity="center"
-    android:layout_marginBottom="16dp"
-    android:orientation="vertical">
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/budget"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@drawable/bg_budget_detail">
-
-        <TextView
-            android:id="@+id/imgBudget"
-            android:layout_width="80dp"
-            android:layout_height="96dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"/>
-
-        <TextView
-            android:id="@id/txtNameBudget"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/urbanist_500"
-            android:text="Necessities"
-            android:textColor="#2D0D59"
-            android:textSize="14sp"
-            android:layout_marginTop="-8dp"
-            app:layout_constraintEnd_toEndOf="@id/imgBudget"
-            app:layout_constraintStart_toStartOf="@id/imgBudget"
-            app:layout_constraintTop_toBottomOf="@id/imgBudget" />
-
-        <TextView
-            android:id="@+id/txtPer"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/urbanist_500"
-            android:text="55%"
-            android:textColor="#2D0D59"
-            android:textSize="10sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="@id/imgBudget"
-            app:layout_constraintTop_toTopOf="parent" />
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
+    android:layout_margin="@dimen/_6sdp"
+    app:cardBackgroundColor="@color/white"
+    app:cardCornerRadius="@dimen/_16sdp"
+    app:cardElevation="@dimen/_4sdp"
+    app:strokeWidth="0dp">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
         android:gravity="center"
-        android:orientation="horizontal">
+        android:orientation="vertical"
+        android:padding="@dimen/_12sdp">
+
+        <FrameLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/imgBudget"
+                android:layout_width="@dimen/_60sdp"
+                android:layout_height="@dimen/_70sdp"
+                android:scaleType="centerInside"
+                android:src="@drawable/ic_necessities" />
+
+            <TextView
+                android:id="@+id/txtPer"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="top|end"
+                android:background="@drawable/bg_gradient_button"
+                android:fontFamily="@font/urbanist_700"
+                android:paddingHorizontal="@dimen/_6sdp"
+                android:paddingVertical="@dimen/_2sdp"
+                android:text="55%"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_8ssp"
+                android:elevation="@dimen/_2sdp" />
+
+        </FrameLayout>
 
         <TextView
-            android:id="@+id/txtMoney"
+            android:id="@+id/txtNameBudget"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/urbanist_500"
-            android:text="1000000 đ"
-            android:textColor="#772DDF"
-            android:textSize="16sp" />
+            android:layout_marginTop="@dimen/_8sdp"
+            android:fontFamily="@font/urbanist_700"
+            android:text="Necessities"
+            android:textColor="#424242"
+            android:textSize="@dimen/_12ssp" />
 
-        <ImageView
-            android:id="@+id/btnUpdateMoney"
-            android:layout_width="16dp"
-            android:layout_height="16dp"
-            android:layout_marginStart="@dimen/_6ssp"
-            android:src="@drawable/ic_edit" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_4sdp"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/txtMoney"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/urbanist_700"
+                android:text="1.000.000 đ"
+                android:textColor="@color/purple_primary"
+                android:textSize="@dimen/_13ssp" />
+
+            <ImageView
+                android:id="@+id/btnUpdateMoney"
+                android:layout_width="@dimen/_14sdp"
+                android:layout_height="@dimen/_14sdp"
+                android:layout_marginStart="@dimen/_6sdp"
+                android:padding="@dimen/_2sdp"
+                android:src="@drawable/ic_edit"
+                app:tint="#BDBDBD" />
+
+        </LinearLayout>
 
     </LinearLayout>
 
-</LinearLayout>
+</com.google.android.material.card.MaterialCardView>

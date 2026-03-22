@@ -4,7 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.moneymanagement.databinding.ItemBudgetBinding
-import com.example.moneymanagement.presentation.database.BudgetEntity
+import com.example.moneymanagement.presentation.database.roomdb.BudgetEntity
 import java.text.DecimalFormat
 
 class BudgetDetailAdapter(
@@ -35,7 +35,7 @@ class BudgetDetailAdapter(
 
             binding.txtNameBudget.text = budgetDetail.nameBudget
             binding.txtMoney.text = "$formatMoney"
-            binding.imgBudget.setBackgroundResource(budgetDetail.imgBudget)
+            binding.imgBudget.setImageResource(budgetDetail.imgBudget)
 
             val moneyJar = binding.txtMoney.text.toString()
             val formatMoneyJar = moneyJar.replace(".", "")
