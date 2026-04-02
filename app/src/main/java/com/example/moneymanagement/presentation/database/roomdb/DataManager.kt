@@ -14,7 +14,8 @@ object DataManager {
                 context.applicationContext,
                 AppDatabase::class.java,
                 "data.db"
-            ).build()
+            ).fallbackToDestructiveMigration()
+            .build()
             INSTANCE = instance
             instance
         }

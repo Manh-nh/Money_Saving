@@ -1,5 +1,9 @@
 <resources>
     <string name="app_name">Money Management</string>
+
+    <string name="apiKeyChatGPT" translatable="false">AIzaSyDLs5xiPRQ2DP2sPxoUgnoyJDyYKLg0siU</string>
+
+
     <string name="save_money"> Money Saving</string>
     <string name="next">Next</string>
     <string name="start">Start</string>
@@ -12,4 +16,15 @@
     <string name="content3">Clear income classification with six recommended spending jars.</string>
     <string name="content4">Loans are clearly and tightly categorized.</string>
     <string name="currercy">Currercy</string>
+    <string name="language">Language</string>
+
+    <string name="vietname">Việt Nam</string>
+    <string name="english">English</string>
+    <string name="portugal">Portugal</string>
+    <string name="gemarni">Germany</string>
+    <string name="Korean">Korean</string>
+    <string name="japan">Japan</string>
+    <string name="china">China</string>
+    <string name="arabic"> Arabic</string>
+
 </resources>

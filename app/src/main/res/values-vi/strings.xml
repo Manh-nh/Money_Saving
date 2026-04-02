@@ -1,0 +1,25 @@
+<resources>
+    <string name="app_name">Quản lý tài chính</string>
+    <string name="save_money">Tiết kiệm tiền</string>
+    <string name="next">Tiếp tục</string>
+    <string name="start">Bắt đầu</string>
+    <string name="title1">Quản lý tài chính</string>
+    <string name="title2">Biểu đồ phân tích chi tiêu</string>
+    <string name="title3">Phân loại chi tiêu</string>
+    <string name="title4">Quản lý nợ</string>
+    <string name="content1">Theo dõi chi tiêu thông minh, dễ dàng quản lý</string>
+    <string name="content2">Biểu đồ thông minh cho báo cáo quản lý tài chính hàng tháng</string>
+    <string name="content3">Phân loại thu nhập rõ ràng với sáu hũ chi tiêu được đề xuất.</string>
+    <string name="content4">Các khoản vay được phân loại rõ ràng và chặt chẽ.</string>
+    <string name="currercy">Tiền tệ</string>
+    <string name="language">Ngôn ngữ</string>
+
+    <string name="vietname">Tiếng Việt</string>
+    <string name="english">Tiếng Anh</string>
+    <string name="portugal">Tiếng Bồ Đào Nha</string>
+    <string name="gemarni">Tiếng Đức</string>
+    <string name="Korean">Tiếng Hàn</string>
+    <string name="japan">Tiếng Nhật</string>
+    <string name="china">Tiếng Trung</string>
+    <string name="arabic">Tiếng Ả Rập</string>
+</resources>

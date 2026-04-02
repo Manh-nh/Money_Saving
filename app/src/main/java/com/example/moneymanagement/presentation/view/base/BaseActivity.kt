@@ -2,8 +2,10 @@ package com.example.moneymanagement.presentation.view.base
 
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.viewbinding.ViewBinding
+
 
 abstract class BaseActivity<VB : ViewBinding>(private val bindingFactory: (LayoutInflater) -> VB) :
     AppCompatActivity(), BaseView {
@@ -26,6 +28,11 @@ abstract class BaseActivity<VB : ViewBinding>(private val bindingFactory: (Layou
 
 
     override fun initializeComponent() {
+        window.decorView.setSystemUiVisibility(
+            (View.SYSTEM_UI_FLAG_FULLSCREEN
+                    or View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+                    or View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY)
+        )
     }
 
     override fun initializeEvents() {

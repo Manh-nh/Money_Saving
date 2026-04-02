@@ -38,6 +38,10 @@ android {
     buildFeatures{
         viewBinding = true
     }
+
+    androidResources {
+        generateLocaleConfig = false
+    }
 }
 
 dependencies {
@@ -53,6 +57,7 @@ dependencies {
     implementation("com.intuit.sdp:sdp-android:1.1.1")
     implementation("com.intuit.ssp:ssp-android:1.1.1")
 
+    implementation("com.airbnb.android:lottie:6.7.1")
     implementation("com.google.android.material:material:1.12.0")
     implementation("androidx.fragment:fragment-ktx:1.6.2")
 
@@ -69,6 +74,7 @@ dependencies {
 
     implementation ("com.tbuonomo:dotsindicator:4.3")
 
+    implementation("com.google.ai.client.generativeai:generativeai:0.9.0")
     implementation("com.squareup.retrofit2:retrofit:3.0.0")
     implementation("com.squareup.retrofit2:converter-gson:3.0.0")
     implementation("com.squareup.okhttp3:okhttp:4.11.0")

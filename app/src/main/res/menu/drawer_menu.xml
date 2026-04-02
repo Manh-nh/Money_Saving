@@ -23,8 +23,8 @@
 
         <item
             android:id="@+id/nav_chatGPT"
-            android:icon="@drawable/ic_language"
-            android:title="Language" />
+            android:icon="@drawable/ic_sync"
+            android:title="AI Financial Assistant" />
 
     </group>
 

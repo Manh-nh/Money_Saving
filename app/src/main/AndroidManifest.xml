@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
 
     <application
         android:allowBackup="true"
@@ -12,6 +13,7 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
+        android:localeConfig="@xml/locales_config"
         android:theme="@style/Theme.MoneyManagement">
         <activity
             android:name=".presentation.view.activity.currency.CurrencyActivity"
@@ -19,7 +21,7 @@
             android:screenOrientation="portrait"
             />
         <activity
-            android:name=".presentation.view.activity.splashactivity.SplashActivity"
+            android:name=".presentation.view.activity.splash.SplashActivity"
             android:exported="true"
             android:screenOrientation="portrait"
             >
@@ -30,30 +32,40 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".presentation.view.activity.addnewactivity.AddNewActivity"
+            android:name=".presentation.view.activity.addnew.AddNewActivity"
             android:windowSoftInputMode="adjustPan"
             android:screenOrientation="portrait"
             />
-        <activity android:name=".presentation.view.activity.transactionsactivity.TransactionsActivity"
+        <activity android:name=".presentation.view.activity.transactions.TransactionsActivity"
             android:screenOrientation="portrait"
             />
-        <activity android:name=".presentation.view.activity.homeactivity.HomeActivity"
+        <activity android:name=".presentation.view.activity.home.HomeActivity"
             android:screenOrientation="portrait"
             />
-        <activity android:name=".presentation.view.activity.staticactivity.StaticActivity"
+        <activity android:name=".presentation.view.activity.static.StaticActivity"
             android:screenOrientation="portrait"
             />
-        <activity android:name=".presentation.view.activity.budgetactivity.BudgetActivity"
+        <activity android:name=".presentation.view.activity.budget.BudgetActivity"
             android:screenOrientation="portrait"
             />
-        <activity android:name=".presentation.view.activity.budetdetailactivity.BudgetDetailActivity"
+        <activity android:name=".presentation.view.activity.budetdetail.BudgetDetailActivity"
             android:screenOrientation="portrait"
             />
-        <activity android:name=".presentation.view.activity.jardetailactivity.JarDetailActivity"
+        <activity android:name=".presentation.view.activity.jardetail.JarDetailActivity"
             android:screenOrientation="portrait"
             />
-        <activity android:name=".presentation.view.activity.introactivity.IntroActivity"
+        <activity
+            android:name=".presentation.view.activity.intro.IntroActivity"
             android:screenOrientation="portrait"
+            />
+        <activity
+            android:name=".presentation.view.activity.language.LanguageActivity"
+            android:screenOrientation="portrait"
+            />
+        <activity
+            android:name=".presentation.view.activity.chat.ChatActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize"
             />
     </application>
 
