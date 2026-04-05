@@ -18,6 +18,7 @@ import com.example.moneymanagement.databinding.DialogNoInternetBinding
 import com.example.moneymanagement.presentation.database.roomdb.DataManager
 import com.example.moneymanagement.presentation.utils.FinancialContextHelper
 import com.example.moneymanagement.presentation.utils.NetworkUtils
+import com.example.moneymanagement.presentation.utils.RemoteConfigManager
 import com.example.moneymanagement.presentation.view.adapter.ChatAdapter
 import com.example.moneymanagement.presentation.viewmodel.ChatViewModel
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
@@ -47,6 +48,8 @@ class ChatActivity : AppCompatActivity() {
         loadContextAndInit()
         setupWindowInsets()
         checkNetworkAndShowDialog()
+        
+        RemoteConfigManager.init()
     }
 
     private fun setupWindowInsets() {
@@ -77,7 +80,7 @@ class ChatActivity : AppCompatActivity() {
             }
             val text = binding.edtMessage.text.toString()
             if (text.isNotBlank()) {
-                val apiKey = getString(R.string.apiKeyChatGPT).trim()
+                val apiKey = RemoteConfigManager.getGeminiApiKey()
                 viewModel.sendMessage(apiKey, text)
                 binding.edtMessage.setText("")
             }

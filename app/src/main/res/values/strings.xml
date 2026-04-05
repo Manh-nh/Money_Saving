@@ -1,8 +1,6 @@
 <resources>
     <string name="app_name">Money Management</string>
 
-    <string name="apiKeyChatGPT" translatable="false">AIzaSyDLs5xiPRQ2DP2sPxoUgnoyJDyYKLg0siU</string>
-
 
     <string name="save_money"> Money Saving</string>
     <string name="next">Next</string>
