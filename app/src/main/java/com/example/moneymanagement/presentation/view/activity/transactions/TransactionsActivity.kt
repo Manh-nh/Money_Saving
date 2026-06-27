@@ -57,6 +57,22 @@ class TransactionsActivity :
     override fun initializeEvents() {
         binding.btnBack.setOnClickListener { finish() }
         binding.btnDelete.setOnClickListener { deleteItem() }
+        binding.btnEdit.setOnClickListener {
+            val intent = android.content.Intent(this, com.example.moneymanagement.presentation.view.activity.addnew.AddNewActivity::class.java)
+            val gson = Gson()
+            val transactionJson = gson.toJson(data)
+            intent.putExtra("EDIT_TRANSACTION", transactionJson)
+            val tabIndex = when (data.type) {
+                "expend" -> 0
+                "income" -> 1
+                "loan" -> 2
+                else -> 0
+            }
+            intent.putExtra("TAB_INDEX", tabIndex)
+            intent.putExtra("TRANSACTION_DATE", date)
+            startActivity(intent)
+            finish()
+        }
     }
 
     override fun initializeData() {

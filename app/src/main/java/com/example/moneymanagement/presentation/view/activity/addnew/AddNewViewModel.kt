@@ -16,6 +16,9 @@ class AddNewViewModel : ViewModel() {
     val typeAddNew: LiveData<String> get() = type
     private lateinit var appDatabase: AppDatabase
 
+    var editingTransaction: com.example.moneymanagement.presentation.database.model.TransactionChild? = null
+    var editingTransactionDate: String? = null
+
     fun setDataList(list: List<AddNewEntity>) {
         data.value = list
     }
@@ -71,6 +74,60 @@ class AddNewViewModel : ViewModel() {
                     else -> budget.moneyBudget
                 }
                 appDatabase.addBudget().updateMoney(budget.id, newMoney)
+            }
+        }
+    }
+
+    fun updateExpendEntity(
+        id: Int,
+        amountExpend: Int,
+        type: String,
+        nameTypeCategory: String,
+        imgTypeCategory: Int,
+        nameBudget: String,
+        note: String?,
+        dateExpend: String,
+        timeExpend: String,
+        imgBudget: Int,
+    ) {
+        val entity = AddNewEntity(
+            id = id,
+            type = type,
+            amount = amountExpend,
+            nameTypeCategory = nameTypeCategory,
+            imgTypeCategory = imgTypeCategory,
+            imgBudget = imgBudget,
+            nameBudget = nameBudget,
+            note = note,
+            date = dateExpend,
+            time = timeExpend
+        )
+        CoroutineScope(Dispatchers.IO).launch {
+            appDatabase.addNewDao().updateExpend(entity)
+            recalculateBalances()
+        }
+    }
+
+    fun recalculateBalances() {
+        CoroutineScope(Dispatchers.IO).launch {
+            val transactions = appDatabase.addNewDao().getAllSync()
+            val jars = appDatabase.addBudget().getBudgetDetailSync()
+            
+            jars.forEach { jar ->
+                val jarTransactions = transactions.filter { it.nameBudget == jar.nameBudget }
+                var balance = jar.initialBudget
+                
+                jarTransactions.forEach { trans ->
+                    when (trans.type) {
+                        "expend" -> balance -= trans.amount
+                        "income" -> balance += trans.amount
+                        "loan" -> {
+                            if (trans.nameTypeCategory == "Loan") balance += trans.amount
+                            else if (trans.nameTypeCategory == "Borrow") balance -= trans.amount
+                        }
+                    }
+                }
+                appDatabase.addBudget().updateMoney(jar.id, balance)
             }
         }
     }

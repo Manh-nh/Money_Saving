@@ -93,6 +93,7 @@ class BudgetDetailViewModel : ViewModel() {
             val newJar = BudgetEntity(
                 nameBudget = name,
                 moneyBudget = money,
+                initialBudget = money,
                 imgBudget = R.drawable.ic_saving_budget // Default icon for new jars
             )
             appDatabase.addBudget().insertBudgetDetail(newJar)
@@ -106,7 +107,7 @@ class BudgetDetailViewModel : ViewModel() {
             
             jars.forEach { jar ->
                 val jarTransactions = transactions.filter { it.nameBudget == jar.nameBudget }
-                var balance = 0
+                var balance = jar.initialBudget
                 
                 jarTransactions.forEach { trans ->
                     when (trans.type) {

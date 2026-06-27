@@ -27,6 +27,15 @@ class AddNewCategoryAdapter(
 
     override fun getItemCount(): Int = data.size
 
+    fun setSelectedCategory(name: String?) {
+        if (name == null) return
+        val pos = data.indexOfFirst { it.typeCategory == name }
+        if (pos != -1) {
+            selectedPosition = pos
+            notifyDataSetChanged()
+        }
+    }
+
     inner class ViewHolder(val binding: ItemAddNewCategoryBinding) :
         RecyclerView.ViewHolder(binding.root) {
 

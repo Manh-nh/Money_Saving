@@ -99,6 +99,26 @@ class AddNewLoanFragment :
 
         binding.txtTime.text = "$hour:$minute"
         binding.txtDate.text = "$day/$month/$year"
+
+        val editingTrans = addNew.editingTransaction
+        if (editingTrans != null && editingTrans.type == "loan") {
+            binding.edtSetMoney.setText(editingTrans.expendPrice.toString())
+            binding.edtNote.setText(editingTrans.note)
+            binding.txtBudgetSelection.text = editingTrans.nameBudget
+            nameBudget = editingTrans.nameBudget
+            imgBudget = editingTrans.imgBudget
+            nameCategory = editingTrans.nameCategory ?: "None"
+            imgCategory = editingTrans.imgCategory
+            adapter.setSelectedCategory(editingTrans.nameCategory)
+            
+            val transDate = addNew.editingTransactionDate
+            if (transDate != null) {
+                date = transDate
+                binding.txtDate.text = transDate
+            }
+            time = editingTrans.time
+            binding.txtTime.text = editingTrans.time
+        }
     }
 
     private fun showBudgetBottomSheet() {

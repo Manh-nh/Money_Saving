@@ -42,6 +42,13 @@ class AddNewActivity : BaseActivity<ActivityAddNewBinding>(ActivityAddNewBinding
         appDatabase = DataManager.getDataBase(this)
         addNewViewModel.setAppDataBase(appDatabase)
 
+        val editJson = intent.getStringExtra("EDIT_TRANSACTION")
+        if (editJson != null) {
+            val gson = com.google.gson.Gson()
+            addNewViewModel.editingTransaction = gson.fromJson(editJson, com.example.moneymanagement.presentation.database.model.TransactionChild::class.java)
+            addNewViewModel.editingTransactionDate = intent.getStringExtra("TRANSACTION_DATE")
+        }
+
         TabLayoutMediator(binding.tabLayoutAdd, binding.viewPagerAddNew) { tab, position ->
             tab.text = when (position) {
                 0 -> this.getString(R.string.expend)
@@ -99,18 +106,33 @@ class AddNewActivity : BaseActivity<ActivityAddNewBinding>(ActivityAddNewBinding
         val data = addNewViewModel.getDataList()
         if (!data.isNullOrEmpty()) {
             val expend = data[0]
-            addNewViewModel.insertExpendEntity(
-                expend.amount,
-                expend.type,
-                expend.nameTypeCategory,
-                expend.imgTypeCategory,
-                expend.nameBudget,
-                expend.note,
-                expend.date,
-                expend.time,
-                expend.imgBudget
-
-            )
+            val editingTrans = addNewViewModel.editingTransaction
+            if (editingTrans != null) {
+                addNewViewModel.updateExpendEntity(
+                    editingTrans.id,
+                    expend.amount,
+                    expend.type,
+                    expend.nameTypeCategory,
+                    expend.imgTypeCategory,
+                    expend.nameBudget,
+                    expend.note,
+                    expend.date,
+                    expend.time,
+                    expend.imgBudget
+                )
+            } else {
+                addNewViewModel.insertExpendEntity(
+                    expend.amount,
+                    expend.type,
+                    expend.nameTypeCategory,
+                    expend.imgTypeCategory,
+                    expend.nameBudget,
+                    expend.note,
+                    expend.date,
+                    expend.time,
+                    expend.imgBudget
+                )
+            }
             Toast.makeText(this, this.getString(R.string.save_success), Toast.LENGTH_SHORT).show()
             finish()
         }
