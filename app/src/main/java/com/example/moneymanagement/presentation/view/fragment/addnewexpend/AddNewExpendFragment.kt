@@ -37,15 +37,11 @@ class AddNewExpendFragment :
     private lateinit var note: String
     private lateinit var date: String
     private lateinit var time: String
-    private lateinit var type: String
+    private var type: String = "expend"
 
     private val addNew: AddNewViewModel by activityViewModels()
 
     override fun initializeComponent() {
-
-        addNew.typeAddNew.observe(viewLifecycleOwner) {
-            type = it
-        }
 
         viewModel = ViewModelProvider(this)[AddNewExpendViewModel::class.java]
         data = viewModel.initData(requireContext())

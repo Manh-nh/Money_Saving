@@ -38,15 +38,12 @@ class AddNewIncomeFragment :
     private lateinit var note: String
     private lateinit var date: String
     private lateinit var time: String
-    private lateinit var type: String
+    private var type: String = "income"
 
     private val addNew: AddNewViewModel by activityViewModels()
 
 
     override fun initializeComponent() {
-        addNew.typeAddNew.observe(viewLifecycleOwner){
-            type = it
-        }
 
 
         viewModel = ViewModelProvider(this)[AddNewIncomeViewModel::class.java]

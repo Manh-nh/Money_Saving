@@ -3,7 +3,7 @@ package com.example.moneymanagement.presentation.database.roomdb
 import androidx.room.Database
 import androidx.room.RoomDatabase
 
-@Database(entities = [AddNewEntity :: class, MoneyBudgetEntity::class, BudgetEntity::class, ChatMessageEntity::class], version = 2)
+@Database(entities = [AddNewEntity :: class, MoneyBudgetEntity::class, BudgetEntity::class, ChatMessageEntity::class], version = 3)
 abstract class AppDatabase: RoomDatabase() {
     abstract fun addNewDao() : AddNewDao
 

@@ -37,17 +37,13 @@ class AddNewLoanFragment :
     private lateinit var note: String
     private lateinit var date: String
     private lateinit var time: String
-    private lateinit var type: String
+    private var type: String = "loan"
 
     private val addNew: AddNewViewModel by activityViewModels()
 
 
     override fun initializeComponent() {
         viewModel = ViewModelProvider(this)[AddNewLoanViewModel::class.java]
-
-        addNew.typeAddNew.observe(viewLifecycleOwner) {
-            type = it
-        }
 
         data = viewModel.initData(requireContext())
         adapter = AddNewCategoryAdapter(data, this)
