@@ -22,6 +22,9 @@ interface AddBudgetDetailDao {
     @Query("UPDATE BudgetEntity SET moneyBudget = :newMoneyBudget WHERE id = :id ")
     suspend fun updateMoney(id: Int, newMoneyBudget: Int)
 
+    @Query("UPDATE BudgetEntity SET initialBudget = :newInitialBudget, moneyBudget = :newMoneyBudget WHERE id = :id")
+    suspend fun updateInitialAndCurrentMoney(id: Int, newInitialBudget: Int, newMoneyBudget: Int)
+
     @Delete
     suspend fun deleteBudget(budgetEntity: BudgetEntity)
 

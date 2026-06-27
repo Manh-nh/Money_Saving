@@ -1,8 +1,8 @@
 package com.example.moneymanagement.presentation.view.activity.currency
 
 import android.view.View
-import android.widget.ArrayAdapter
 import android.widget.Toast
+import com.example.moneymanagement.R
 import com.example.moneymanagement.databinding.ActivityCurrencyBinding
 import com.example.moneymanagement.presentation.database.api.RetrofitClient
 import com.example.moneymanagement.presentation.database.model.CurrencyItem
@@ -66,19 +66,19 @@ class CurrencyActivity : BaseActivity<ActivityCurrencyBinding>(ActivityCurrencyB
     private fun performConversion() {
         val amountStr = binding.edtAmount.text.toString()
         if (amountStr.isEmpty()) {
-            Toast.makeText(this, "Please enter an amount", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, this.getString(R.string.please_enter_amount_money), Toast.LENGTH_SHORT).show()
             return
         }
 
         val amount = amountStr.toDoubleOrNull() ?: 0.0
 
         binding.btnConvert.isEnabled = false
-        binding.btnConvert.text = "Converting..."
+        binding.btnConvert.text = getString(R.string.converting)
         
         RetrofitClient.retrofitCurrency.getLatestRates(fromCurrencyCode).enqueue(object : Callback<CurrencyResponse> {
             override fun onResponse(call: Call<CurrencyResponse>, response: Response<CurrencyResponse>) {
                 binding.btnConvert.isEnabled = true
-                binding.btnConvert.text = "Convert Now"
+                binding.btnConvert.text = getString(R.string.conver_now)
                 if (response.isSuccessful) {
                     val rates = response.body()?.conversionRates
                     val rate = rates?.get(toCurrencyCode)
@@ -95,7 +95,7 @@ class CurrencyActivity : BaseActivity<ActivityCurrencyBinding>(ActivityCurrencyB
 
             override fun onFailure(call: Call<CurrencyResponse>, t: Throwable) {
                 binding.btnConvert.isEnabled = true
-                binding.btnConvert.text = "Convert Now"
+                binding.btnConvert.text = getText(R.string.conver_now)
                 Toast.makeText(this@CurrencyActivity, "Error: ${t.message}", Toast.LENGTH_SHORT).show()
             }
         })

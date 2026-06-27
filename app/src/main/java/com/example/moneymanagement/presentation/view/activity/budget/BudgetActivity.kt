@@ -2,6 +2,7 @@ package com.example.moneymanagement.presentation.view.activity.budget
 
 import android.content.Intent
 import androidx.lifecycle.ViewModelProvider
+import com.example.moneymanagement.R
 import com.example.moneymanagement.databinding.ActivityBudgetBinding
 import com.example.moneymanagement.presentation.database.roomdb.DataManager
 import com.example.moneymanagement.presentation.view.adapter.OnBudgetUpdatedListener
@@ -53,12 +54,12 @@ class BudgetActivity : BaseActivity<ActivityBudgetBinding>(ActivityBudgetBinding
         viewModel.setTotalMoney.observe(this) {
             if (it == null) {
                 binding.txtMoneyBudget.text = "0 đ"
-                binding.txtBudgetMoney.text = "Budget: 0 đ"
+                binding.txtBudgetMoney.text = "${this.getString(R.string.budget)}: 0 đ"
                 moneyBudget = 0
             } else {
                 val formattedBudget = formatMoney(it.moneyBudget)
                 binding.txtMoneyBudget.text = "$formattedBudget đ"
-                binding.txtBudgetMoney.text = "Budget: $formattedBudget đ"
+                binding.txtBudgetMoney.text = "${this.getString(R.string.budget)}: $formattedBudget đ"
                 moneyBudget = it.moneyBudget
                 calculateRemainingBudget()
                 calculateBudgetPercent()
@@ -69,7 +70,7 @@ class BudgetActivity : BaseActivity<ActivityBudgetBinding>(ActivityBudgetBinding
         viewModel.getAmountExpend.observe(this) { totalExpend ->
             totalMoneyExpend = totalExpend
             val formattedExpend = formatMoney(totalExpend)
-            binding.txtExpends.text = "Expends: $formattedExpend đ"
+            binding.txtExpends.text = "${this.getString(R.string.expend)}: $formattedExpend đ"
             calculateRemainingBudget()
             calculateBudgetPercent()
             progressBar()
@@ -95,7 +96,7 @@ class BudgetActivity : BaseActivity<ActivityBudgetBinding>(ActivityBudgetBinding
     private fun calculateRemainingBudget() {
         val remainingAmount = moneyBudget - totalMoneyExpend
         val formattedRemain = formatMoney(remainingAmount)
-        binding.txtRemain.text = "Remain: $formattedRemain đ"
+        binding.txtRemain.text = "${this.getString(R.string.remain)}: $formattedRemain đ"
         binding.txtMoneyBudget.text = "$formattedRemain đ"
     }
 
@@ -105,7 +106,7 @@ class BudgetActivity : BaseActivity<ActivityBudgetBinding>(ActivityBudgetBinding
     }
 
     private fun progressBar(){
-        if (totalMoneyExpend <= 0) {
+        if (totalMoneyExpend <= 0 || moneyBudget <= 0) {
             binding.progressBar.progress = 0
         } else {
             budgetPercent = ((totalMoneyExpend.toFloat() / moneyBudget) * 100)

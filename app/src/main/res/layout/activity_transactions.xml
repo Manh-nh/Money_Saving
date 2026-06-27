@@ -27,7 +27,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/urbanist_600"
-            android:text="Transactions"
+            android:text="@string/transactions"
             android:textColor="#2D0D59"
             android:textSize="20sp"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -41,7 +41,7 @@
             android:layout_height="wrap_content"
             android:background="@drawable/bg_btn_add_new"
             android:fontFamily="@font/urbanist_600"
-            android:text="Edit"
+            android:text="@string/edit"
             android:textColor="@color/white"
             android:textSize="14sp"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -106,7 +106,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:text="Category" />
+        android:text="@string/category" />
 
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -158,7 +158,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:fontFamily="@font/urbanist_600"
-        android:text="Budget"
+        android:text="@string/budget"
         android:textColor="#2D0D59"
         android:textSize="14sp" />
 
@@ -210,7 +210,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:fontFamily="@font/urbanist_600"
-        android:text="Note"
+        android:text="@string/note"
         android:textColor="#2D0D59"
         android:textSize="14sp" />
 
@@ -222,7 +222,7 @@
         android:layout_marginBottom="24dp"
         android:background="@drawable/bg_note"
         android:fontFamily="@font/urbanist_500"
-        android:hint="Add a description"
+        android:hint="@string/add_a_description"
         android:textColor="#9D89B8"
         android:textSize="14sp" />
 
@@ -232,7 +232,7 @@
         android:layout_height="wrap_content"
         android:background="@drawable/bg_delete"
         android:fontFamily="@font/urbanist_600"
-        android:text="Delete Transaction"
+        android:text="@string/delete_transaction"
         android:textAlignment="center"
         android:textColor="@color/white"
         android:textSize="16sp" />

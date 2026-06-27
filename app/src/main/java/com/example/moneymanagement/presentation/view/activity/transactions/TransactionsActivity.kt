@@ -79,7 +79,7 @@ class TransactionsActivity :
             color = (Color.parseColor("#4CAF50"))
         } else {
             if (data.nameCategory == "Bills") {
-                bindMoney =  "+ ${formatMoney(moneyValue)} đ"
+                bindMoney = "+ ${formatMoney(moneyValue)} đ"
                 color = (Color.parseColor("#4CAF50"))
             } else {
                 bindMoney = "- ${formatMoney(moneyValue)} đ"
@@ -98,18 +98,17 @@ class TransactionsActivity :
         binding.edtNote.setText(data.note)
         binding.imgBudget.setImageResource(data.imgBudget)
 
-        Log.d("nam", data.imgBudget.toString())
     }
 
     private fun deleteItem() {
 
-        val dialog = AlertDialog.Builder(this).setTitle("Delete")
-            .setMessage("Do you want to delete this item")
-            .setPositiveButton("Delete") { dialog, it ->
+        val dialog = AlertDialog.Builder(this).setTitle(this.getString(R.string.delete))
+            .setMessage(this.getString(R.string.do_you_want_to_delete_item))
+            .setPositiveButton(this.getString(R.string.delete)) { dialog, it ->
                 viewModel.delete(data.id)
                 finish()
             }
-            .setNegativeButton("Cancel") { dialog, it ->
+            .setNegativeButton(this.getString(R.string.cancel)) { dialog, it ->
                 dialog.dismiss()
             }
 

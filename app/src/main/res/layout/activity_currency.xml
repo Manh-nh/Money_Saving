@@ -80,7 +80,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/urbanist_700"
-                        android:text="Amount to Convert"
+                        android:text="@string/amount_to_convert"
                         android:textColor="@color/purple_primary"
                         android:textSize="@dimen/_14ssp" />
 
@@ -90,7 +90,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/_12sdp"
                         android:background="@drawable/bg_soft_input"
-                        android:hint="Enter amount"
+                        android:hint="@string/enter_amount"
                         android:inputType="numberDecimal"
                         android:padding="@dimen/_14sdp"
                         android:textColor="@color/black"

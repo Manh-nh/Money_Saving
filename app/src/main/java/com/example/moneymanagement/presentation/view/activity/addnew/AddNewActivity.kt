@@ -5,6 +5,7 @@ import androidx.activity.viewModels
 import androidx.core.view.WindowCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.WindowInsetsControllerCompat
+import com.example.moneymanagement.R
 import com.example.moneymanagement.databinding.ActivityAddNewBinding
 import com.example.moneymanagement.presentation.database.roomdb.AppDatabase
 import com.example.moneymanagement.presentation.database.roomdb.DataManager
@@ -17,8 +18,8 @@ import com.google.android.material.tabs.TabLayoutMediator
 
 class AddNewActivity : BaseActivity<ActivityAddNewBinding>(ActivityAddNewBinding::inflate) {
 
-    private lateinit var adapter: com.example.moneymanagement.presentation.view.adapter.AddNewAdapter
-    private val addNewViewModel: com.example.moneymanagement.presentation.view.activity.addnew.AddNewViewModel by viewModels()
+    private lateinit var adapter: AddNewAdapter
+    private val addNewViewModel: AddNewViewModel by viewModels()
     private lateinit var typeAddNew: String
     private lateinit var appDatabase: AppDatabase
 
@@ -35,15 +36,18 @@ class AddNewActivity : BaseActivity<ActivityAddNewBinding>(ActivityAddNewBinding
         adapter = AddNewAdapter(this)
         binding.viewPagerAddNew.adapter = adapter
 
+        val tabIndex = intent.getIntExtra("TAB_INDEX", 0)
+        binding.viewPagerAddNew.setCurrentItem(tabIndex, false)
+
         appDatabase = DataManager.getDataBase(this)
         addNewViewModel.setAppDataBase(appDatabase)
 
         TabLayoutMediator(binding.tabLayoutAdd, binding.viewPagerAddNew) { tab, position ->
             tab.text = when (position) {
-                0 -> "Expend"
-                1 -> "Income"
-                2 -> "Loan"
-                else -> "Expend"
+                0 -> this.getString(R.string.expend)
+                1 -> this.getString(R.string.income)
+                2 -> this.getString(R.string.loan)
+                else ->  this.getString(R.string.expend)
             }
         }.attach()
 
@@ -107,7 +111,7 @@ class AddNewActivity : BaseActivity<ActivityAddNewBinding>(ActivityAddNewBinding
                 expend.imgBudget
 
             )
-            Toast.makeText(this, "Save success", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, this.getString(R.string.save_success), Toast.LENGTH_SHORT).show()
             finish()
         }
     }

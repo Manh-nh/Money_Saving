@@ -4,6 +4,7 @@ import android.content.Intent
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModelProvider
+import com.example.moneymanagement.R
 import com.example.moneymanagement.databinding.ActivityBudgetDetailBinding
 import com.example.moneymanagement.presentation.Utils
 import com.example.moneymanagement.presentation.database.roomdb.BudgetEntity
@@ -36,20 +37,25 @@ class BudgetDetailActivity :
         val appDatabase = DataManager.getDataBase(this)
         viewModel.setAppDataBase(appDatabase)
 
-        adapter = BudgetDetailAdapter(emptyList(), this)
+        adapter = BudgetDetailAdapter(emptyList(), 0, this)
         binding.lstBudgetName.adapter = adapter
 
         viewModel.listBudget.observe(this) {
             adapter.setData(it)
         }
 
+        viewModel.overallBudget.observe(this) { moneyBudgetEntity ->
+            val totalBudget = moneyBudgetEntity?.moneyBudget ?: 0
+            adapter.setTotalBudget(totalBudget)
+        }
+
         viewModel.syncSuccess.observe(this) { success ->
             if (success) {
-                android.widget.Toast.makeText(this, "Synchronization complete", android.widget.Toast.LENGTH_SHORT).show()
+                android.widget.Toast.makeText(this, this.getString(R.string.synchronization_complete), android.widget.Toast.LENGTH_SHORT).show()
             }
         }
 
-        viewModel.initData()
+        viewModel.initData(this)
         viewModel.recalculateBalances()
 
 

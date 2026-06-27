@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import com.example.moneymanagement.R
 import com.example.moneymanagement.databinding.BottomSheetSetMoneyBudgetBinding
 import com.example.moneymanagement.presentation.view.adapter.OnBudgetUpdatedListener
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
@@ -26,14 +27,14 @@ class SetMoneyBudgetBottomSheet : BottomSheetDialogFragment() {
             val setMoney = binding?.edtSetMoney?.text.toString()
 
             if (setMoney.isEmpty()) {
-                Toast.makeText(requireContext(), "Money not is empty", Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(), this.getString(R.string.name_budget_is_empty), Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
 
             val amount = setMoney.toInt()
 
             if (amount < 0) {
-                Toast.makeText(requireContext(), "Money not is less than 0", Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(), this.getString(R.string.money_is_less_than_0), Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
 

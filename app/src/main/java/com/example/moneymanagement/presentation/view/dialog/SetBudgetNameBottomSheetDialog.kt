@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import com.example.moneymanagement.R
 import com.example.moneymanagement.databinding.BottomSheetAddBudgetBinding
 import com.example.moneymanagement.presentation.view.adapter.OnAddBudgerListener
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
@@ -40,21 +41,22 @@ class SetBudgetNameBottomSheetDialog : BottomSheetDialogFragment() {
     }
 
     fun addBudget() {
-        val setMoney = binding?.edtSetMoney?.text.toString()
-        val setNameBudget = binding?.edtNameBudget?.text.toString()
+        val setMoney = binding?.edtSetMoney?.text.toString().trim()
+        val setNameBudget = binding?.edtNameBudget?.text.toString().trim()
         var money = 0
 
         if (setNameBudget.isEmpty()) {
-            Toast.makeText(requireContext(), "name budget is empty", Toast.LENGTH_SHORT).show()
+            Toast.makeText(requireContext(), this.getString(R.string.name_budget_is_empty), Toast.LENGTH_SHORT).show()
             return
         }
 
-        if (setMoney.toInt() < 1000) {
-            Toast.makeText(requireContext(), "money is less than 1000", Toast.LENGTH_SHORT).show()
+        val parsedMoney = setMoney.toIntOrNull()
+        if (parsedMoney == null || parsedMoney < 1000) {
+            Toast.makeText(requireContext(), this.getString(R.string.money_is_less_than_1000), Toast.LENGTH_SHORT).show()
             return
         }
 
-        money = setMoney.toInt()
+        money = parsedMoney
         listener.onAddBudgetListener(money, setNameBudget)
 
         dismiss()

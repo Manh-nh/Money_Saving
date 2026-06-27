@@ -43,10 +43,10 @@ class HomeActivity : BaseActivity<ActivityHomeBinding>(ActivityHomeBinding::infl
 
         TabLayoutMediator(binding.tabLayout, binding.viewPager) { tab, position ->
             tab.text = when (position) {
-                0 -> "Expend"
-                1 -> "Income"
-                2 -> "Loan"
-                else -> "Expend"
+                0 -> this.getText(R.string.expend)
+                1 -> this.getText(R.string.income)
+                2 -> this.getText(R.string.loan)
+                else ->  this.getText(R.string.expend)
             }
         }.attach()
 
@@ -61,9 +61,7 @@ class HomeActivity : BaseActivity<ActivityHomeBinding>(ActivityHomeBinding::infl
         menu()
         binding.btnMonthSelection.setOnClickListener { showYearPopup() }
         setupNavigationViewListener()
-        binding.btnChatBot.setOnClickListener {
-            startActivity(Intent(this, ChatActivity::class.java))
-        }
+
     }
 
 
@@ -176,11 +174,6 @@ class HomeActivity : BaseActivity<ActivityHomeBinding>(ActivityHomeBinding::infl
                     true
                 }
 
-                R.id.nav_chatGPT -> {
-                    val intent = Intent(this, ChatActivity::class.java)
-                    startActivity(intent)
-                    true
-                }
 
                 else -> false
             }

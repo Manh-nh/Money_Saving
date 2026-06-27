@@ -15,7 +15,7 @@
         android:layout_marginTop="16dp"
         android:layout_marginBottom="16dp"
         android:fontFamily="@font/urbanist_600"
-        android:text="Borrow"
+        android:text="@string/borrow"
         android:textColor="@color/white"
         android:textSize="14sp"
         app:layout_constraintBottom_toTopOf="@id/line"
@@ -53,7 +53,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
         android:fontFamily="@font/urbanist_600"
-        android:text="Loan"
+        android:text="@string/loan"
         android:textColor="@color/white"
         android:textSize="14sp"
         app:layout_constraintEnd_toStartOf="@id/txtMoneyLoan"
@@ -96,7 +96,7 @@
                 android:drawableStart="@drawable/ic_search"
                 android:drawablePadding="8dp"
                 android:fontFamily="@font/urbanist_500"
-                android:hint="Search"
+                android:hint="@string/search"
                 android:textColor="@color/black"
                 android:textColorHint="@color/black"
                 android:textSize="14sp" />
@@ -107,7 +107,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:fontFamily="@font/urbanist_600"
-                android:text="History"
+                android:text="@string/history"
                 android:textColor="#2D0D59"
                 android:textSize="16sp" />
 
@@ -119,7 +119,7 @@
                 android:layout_weight="1"
                 android:fontFamily="@font/urbanist_600"
                 android:gravity="center"
-                android:text="No transactions yet"
+                android:text="@string/no_transactions_yet"
                 android:textColor="#2D0D59"
                 android:textSize="16sp"
                 android:visibility="gone" />
@@ -158,7 +158,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/urbanist_600"
-                android:text="Add new"
+                android:text="@string/add_new"
                 android:textColor="#FFFFFF"
                 android:textSize="16sp" />
 

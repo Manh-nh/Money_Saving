@@ -38,7 +38,7 @@
             android:layout_weight="1"
             android:fontFamily="@font/urbanist_700"
             android:gravity="center"
-            android:text="My Money Jars"
+            android:text="@string/my_money_jars"
             android:textColor="@color/white"
             android:textSize="@dimen/_18ssp" />
 
@@ -76,7 +76,7 @@
         android:background="@drawable/bg_gradient_button"
         android:elevation="@dimen/_6sdp"
         android:fontFamily="@font/urbanist_700"
-        android:text="Add New Jar"
+        android:text="@string/add_new_jar"
         android:textAllCaps="false"
         android:textColor="@color/white"
         android:textSize="@dimen/_14ssp"

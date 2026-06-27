@@ -25,7 +25,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:fontFamily="@font/urbanist_600"
-            android:text="Statistics"
+            android:text="@string/statistics"
             android:textAlignment="center"
             android:textColor="#2D0D59"
             android:textSize="20sp" />
@@ -43,7 +43,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/urbanist_600"
-            android:text="Total balance"
+            android:text="@string/total_balance"
             android:textColor="#2D0D59"
             android:textSize="14sp"
             app:layout_constraintBottom_toBottomOf="parent"

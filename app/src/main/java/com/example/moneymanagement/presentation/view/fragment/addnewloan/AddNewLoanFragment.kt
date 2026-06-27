@@ -5,6 +5,7 @@ import android.text.TextWatcher
 import android.widget.Toast
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.ViewModelProvider
+import com.example.moneymanagement.R
 import com.example.moneymanagement.databinding.FragmentAddNewLoanBinding
 import com.example.moneymanagement.presentation.database.roomdb.AddNewEntity
 import com.example.moneymanagement.presentation.database.model.CategoryModel
@@ -48,7 +49,7 @@ class AddNewLoanFragment :
             type = it
         }
 
-        data = viewModel.initData()
+        data = viewModel.initData(requireContext())
         adapter = AddNewCategoryAdapter(data, this)
         binding.lstCategory.adapter = adapter
     }
@@ -157,18 +158,18 @@ class AddNewLoanFragment :
         note = binding.edtNote.text.toString()
 
         if (amountMoney < 1000) {
-            Toast.makeText(requireContext(), "Money must not be less than 1000", Toast.LENGTH_SHORT)
+            Toast.makeText(requireContext(), this.getString(R.string.money_is_less_than_0), Toast.LENGTH_SHORT)
                 .show()
             return
         }
 
         if (imgCategory == 0) {
-            Toast.makeText(requireContext(), "please choose Category", Toast.LENGTH_SHORT).show()
+            Toast.makeText(requireContext(), this.getString(R.string.please_choose_category), Toast.LENGTH_SHORT).show()
             return
         }
 
         if (nameBudget.isEmpty()) {
-            Toast.makeText(requireContext(), "Please choose Budget", Toast.LENGTH_SHORT).show()
+            Toast.makeText(requireContext(), this.getString(R.string.please_choose_budget), Toast.LENGTH_SHORT).show()
             return
         }
 

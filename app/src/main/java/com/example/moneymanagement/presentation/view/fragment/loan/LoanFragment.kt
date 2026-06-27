@@ -5,11 +5,13 @@ import android.view.View
 import android.view.inputmethod.EditorInfo
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
+import com.example.moneymanagement.R
 import com.example.moneymanagement.databinding.FragmentLoanBinding
 import com.example.moneymanagement.presentation.Utils
 import com.example.moneymanagement.presentation.database.roomdb.DataManager
 import com.example.moneymanagement.presentation.database.model.TransactionChild
 import com.example.moneymanagement.presentation.database.model.TransactionParent
+import com.example.moneymanagement.presentation.database.roomdb.AddNewEntity
 import com.example.moneymanagement.presentation.view.activity.addnew.AddNewActivity
 import com.example.moneymanagement.presentation.view.adapter.LoanParentAdapter
 import com.example.moneymanagement.presentation.view.adapter.OnClickItemTransaction
@@ -27,8 +29,12 @@ class LoanFragment : BaseFragment<FragmentLoanBinding>(FragmentLoanBinding::infl
     private lateinit var viewModel: LoanViewModel
     private lateinit var shareDateViewModel: HomeViewModel
 
+    private var allTransactions: List<AddNewEntity> = emptyList()
+    private var selectedMonth: Int = 0
+    private var selectedYear: Int = 0
 
     override fun initializeComponent() {
+        super.initializeComponent()
 
         viewModel = ViewModelProvider(this)[LoanViewModel::class.java]
         shareDateViewModel = ViewModelProvider(requireActivity())[HomeViewModel::class.java]
@@ -40,19 +46,14 @@ class LoanFragment : BaseFragment<FragmentLoanBinding>(FragmentLoanBinding::infl
         binding.lstHistoryLoan.adapter = adapter
 
         viewModel.loanList.observe(viewLifecycleOwner) { loanEntities ->
-            val filterType = loanEntities.filter { it.type == "loan" }
-            data = viewModel.initData(filterType)
-            adapter.setData(data)
-
-            binding.txtTransaction.visibility = if (filterType.isEmpty()) {
-                View.VISIBLE
-            } else {
-                View.GONE
-            }
+            allTransactions = loanEntities ?: emptyList()
+            applyFilters()
         }
 
         shareDateViewModel.selectedMonthYear.observe(viewLifecycleOwner) { (month, year, _) ->
-            filterByMonthYear(month, year)
+            selectedMonth = month
+            selectedYear = year
+            applyFilters()
         }
 
     }
@@ -60,6 +61,7 @@ class LoanFragment : BaseFragment<FragmentLoanBinding>(FragmentLoanBinding::infl
     override fun initializeEvents() {
         binding.btnAddLoan.setOnClickListener {
             val intent = Intent(requireContext(), AddNewActivity::class.java)
+            intent.putExtra("TAB_INDEX", 2)
             startActivity(intent)
         }
 
@@ -94,22 +96,32 @@ class LoanFragment : BaseFragment<FragmentLoanBinding>(FragmentLoanBinding::infl
     }
 
     private fun searchHistory() {
-        val search = binding.edtSearch.text.toString()
-        if (search.isEmpty()) {
-            viewModel.loanList.observe(viewLifecycleOwner) { loanEntities ->
-                val filteredType = loanEntities.filter { it.type == "loan" }
-                val parentData = viewModel.initData(filteredType)
-                adapter.setData(parentData)
+        applyFilters()
+    }
+
+    private fun applyFilters() {
+        val search = binding.edtSearch.text.toString().trim()
+        val filtered = allTransactions.filter { item ->
+            if (item.type != "loan") return@filter false
+
+            if (selectedMonth > 0 && selectedYear > 0) {
+                val (month, year) = extractMonthYear(item.date)
+                if (month != selectedMonth || year != selectedYear) return@filter false
             }
-        } else {
-            viewModel.loanList.observe(viewLifecycleOwner) { loanEntities ->
-                val filteredType = loanEntities.filter {
-                    it.type == "loan" && it.nameTypeCategory.contains(search)
-                }
-                val parentData = viewModel.initData(filteredType)
-                adapter.setData(parentData)
+
+            if (search.isNotEmpty()) {
+                item.nameTypeCategory.contains(search, ignoreCase = true) ||
+                (item.note?.contains(search, ignoreCase = true) ?: false)
+            } else {
+                true
             }
         }
+
+        data = viewModel.initData(filtered)
+        adapter.setData(data)
+
+        binding.txtTransaction.visibility =
+            if (filtered.isEmpty()) View.VISIBLE else View.GONE
     }
 
     private fun totalMoney() {
@@ -133,33 +145,17 @@ class LoanFragment : BaseFragment<FragmentLoanBinding>(FragmentLoanBinding::infl
         return formatter.format(amount).replace(",", ".")
     }
 
-    private fun filterByMonthYear(selectedMonth: Int, selectedYear: Int) {
-
-        if(selectedMonth == 0 || selectedYear == 0){
-            Toast.makeText(requireContext(), "You are selection month", Toast.LENGTH_SHORT).show()
-            return
-        }
-
-        viewModel.loanList.observe(viewLifecycleOwner) { loanEntities ->
-            val filtered = loanEntities.filter { item ->
-                val (month, year) = extractMonthYear(item.date)
-                item.type == "expend" && month == selectedMonth && year == selectedYear
-            }
-
-            val parentData = viewModel.initData(filtered)
-            adapter.setData(parentData)
-
-            binding.txtTransaction.visibility =
-                if (filtered.isEmpty()) View.VISIBLE else View.GONE
-        }
-    }
-
-
     private fun extractMonthYear(dateString: String): Pair<Int, Int> {
-        val parts = dateString.split("/")
-        val month = parts[1].toInt()
-        val year = parts[2].toInt()
-        return Pair(month, year)
+        return try {
+            val parts = dateString.split("/")
+            if (parts.size >= 3) {
+                Pair(parts[1].toInt(), parts[2].toInt())
+            } else {
+                Pair(0, 0)
+            }
+        } catch (e: Exception) {
+            Pair(0, 0)
+        }
     }
 
 }

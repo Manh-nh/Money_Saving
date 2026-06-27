@@ -20,7 +20,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/_20sdp"
         android:fontFamily="@font/urbanist_700"
-        android:text="Create New Money Jar"
+        android:text="@string/create_new_money_jar"
         android:textAlignment="center"
         android:textColor="@color/black"
         android:textSize="@dimen/_16ssp" />
@@ -30,7 +30,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/_20sdp"
         android:fontFamily="@font/urbanist_600"
-        android:text="Jar Name"
+        android:text="@string/jar_name"
         android:textColor="#757575"
         android:textSize="@dimen/_10ssp" />
 
@@ -41,7 +41,7 @@
         android:layout_marginTop="@dimen/_8sdp"
         android:background="@drawable/bg_soft_input"
         android:fontFamily="@font/urbanist_600"
-        android:hint="e.g. Vacation Jar"
+        android:hint="@string/e_g_vacation_jar"
         android:padding="@dimen/_12sdp"
         android:textColor="@color/black"
         android:textSize="@dimen/_12ssp" />
@@ -51,7 +51,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/_16sdp"
         android:fontFamily="@font/urbanist_600"
-        android:text="Initial Amount (đ)"
+        android:text="@string/initial_amount"
         android:textColor="#757575"
         android:textSize="@dimen/_10ssp" />
 
@@ -82,7 +82,7 @@
             android:layout_weight="1"
             android:background="?attr/selectableItemBackground"
             android:fontFamily="@font/urbanist_700"
-            android:text="Cancel"
+            android:text="@string/cancel"
             android:textAllCaps="false"
             android:textColor="#757575"
             android:textSize="@dimen/_12ssp" />
@@ -95,7 +95,7 @@
             android:layout_weight="1"
             android:background="@drawable/bg_gradient_button"
             android:fontFamily="@font/urbanist_700"
-            android:text="Save"
+            android:text="@string/save"
             android:textAllCaps="false"
             android:textColor="@color/white"
             android:textSize="@dimen/_12ssp"

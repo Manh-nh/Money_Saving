@@ -1,5 +1,6 @@
 package com.example.moneymanagement.presentation.view.adapter
 
+import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -45,10 +46,12 @@ class LanguageAdapter(private var data: List<LanguageModel>,
 
             if (model.isSelected) {
                 binding.btnChoice.setImageResource(R.drawable.ic_choice)
+                binding.nameCountry.setTextColor(Color.BLACK)
                 binding.root.setBackgroundResource(R.drawable.bg_language_item) // Or a selected background if available
             } else {
                 binding.btnChoice.setImageResource(R.drawable.ic_not_choice)
-                binding.root.setBackgroundResource(0) // Remove background or use a default one
+                binding.nameCountry.setTextColor(Color.WHITE)
+                binding.root.setBackgroundResource(R.drawable.bg_language_item_u) // Remove background or use a default one
             }
 
             binding.root.setOnClickListener {

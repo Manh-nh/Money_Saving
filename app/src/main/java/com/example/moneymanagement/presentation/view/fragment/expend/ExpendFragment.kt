@@ -5,10 +5,12 @@ import android.view.View
 import android.view.inputmethod.EditorInfo
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
+import com.example.moneymanagement.R
 import com.example.moneymanagement.databinding.FragmentExpendBinding
 import com.example.moneymanagement.presentation.Utils
 import com.example.moneymanagement.presentation.database.roomdb.DataManager
 import com.example.moneymanagement.presentation.database.model.TransactionChild
+import com.example.moneymanagement.presentation.database.roomdb.AddNewEntity
 import com.example.moneymanagement.presentation.view.activity.addnew.AddNewActivity
 import com.example.moneymanagement.presentation.view.adapter.ExpendParentAdapter
 import com.example.moneymanagement.presentation.view.adapter.OnClickItemTransaction
@@ -22,36 +24,35 @@ class ExpendFragment : BaseFragment<FragmentExpendBinding>(FragmentExpendBinding
     OnClickItemTransaction {
 
     private lateinit var viewModel: ExpendViewModel
-    private lateinit var shareDateViewModel: HomeViewModel
     private lateinit var parentAdapter: ExpendParentAdapter
+    private lateinit var shareDateViewModel: HomeViewModel
+    
+    private var allTransactions: List<AddNewEntity> = emptyList()
+    private var selectedMonth: Int = 0
+    private var selectedYear: Int = 0
 
     override fun initializeComponent() {
+        super.initializeComponent()
 
+        val appDatabase = DataManager.getDataBase(requireContext())
         viewModel = ViewModelProvider(this)[ExpendViewModel::class.java]
+        viewModel.setAppDataBase(appDatabase)
+
         shareDateViewModel = ViewModelProvider(requireActivity())[HomeViewModel::class.java]
 
         parentAdapter = ExpendParentAdapter(this, emptyList())
         binding.lstHistoryExpendParent.adapter = parentAdapter
 
-        val appDatabase = DataManager.getDataBase(requireContext())
-        viewModel.setAppDataBase(appDatabase)
-
         viewModel.expendList.observe(viewLifecycleOwner) { expendEntities ->
-            val filteredType = expendEntities.filter { it.type == "expend" }
-            val parentData = viewModel.initData(filteredType)
-            parentAdapter.setData(parentData)
-
-            binding.txtTransaction.visibility = if (filteredType.isEmpty()) {
-                View.VISIBLE
-            } else {
-                View.GONE
-            }
+            allTransactions = expendEntities ?: emptyList()
+            applyFilters()
         }
 
         shareDateViewModel.selectedMonthYear.observe(viewLifecycleOwner) { (month, year, _) ->
-            filterByMonthYear(month, year)
+            selectedMonth = month
+            selectedYear = year
+            applyFilters()
         }
-
     }
 
     override fun initializeEvents() {
@@ -81,6 +82,7 @@ class ExpendFragment : BaseFragment<FragmentExpendBinding>(FragmentExpendBinding
 
     private fun addExpend() {
         val intent = Intent(requireContext(), AddNewActivity::class.java)
+        intent.putExtra("TAB_INDEX", 0)
         startActivity(intent)
     }
 
@@ -94,24 +96,32 @@ class ExpendFragment : BaseFragment<FragmentExpendBinding>(FragmentExpendBinding
     }
 
     private fun searchHistory() {
-        val search = binding.edtSearch.text.toString()
-        if (search.isEmpty()) {
-            viewModel.expendList.observe(viewLifecycleOwner) { expendEntities ->
-                val filteredType = expendEntities.filter { it.type == "expend" }
-                val parentData = viewModel.initData(filteredType)
-                parentAdapter.setData(parentData)
+        applyFilters()
+    }
+
+    private fun applyFilters() {
+        val search = binding.edtSearch.text.toString().trim()
+        val filtered = allTransactions.filter { item ->
+            if (item.type != "expend") return@filter false
+
+            if (selectedMonth > 0 && selectedYear > 0) {
+                val (month, year) = extractMonthYear(item.date)
+                if (month != selectedMonth || year != selectedYear) return@filter false
             }
-        } else {
-            viewModel.expendList.observe(viewLifecycleOwner) { expendEntities ->
-                val filteredType = expendEntities.filter {
-                    it.type == "expend" && it.nameTypeCategory.contains(search)
-                }
-                val parentData = viewModel.initData(filteredType)
-                parentAdapter.setData(parentData)
-                binding.txtTransaction.visibility =
-                    if (parentData.isEmpty()) View.VISIBLE else View.GONE
+
+            if (search.isNotEmpty()) {
+                item.nameTypeCategory.contains(search, ignoreCase = true) ||
+                (item.note?.contains(search, ignoreCase = true) ?: false)
+            } else {
+                true
             }
         }
+
+        val parentData = viewModel.initData(filtered)
+        parentAdapter.setData(parentData)
+
+        binding.txtTransaction.visibility =
+            if (filtered.isEmpty()) View.VISIBLE else View.GONE
     }
 
     private fun totalExpend() {
@@ -123,7 +133,6 @@ class ExpendFragment : BaseFragment<FragmentExpendBinding>(FragmentExpendBinding
             val formatMoney = formatMoney(totalMoneyExpends)
 
             binding.txtMoney.text = "$formatMoney đ"
-
         }
     }
 
@@ -132,35 +141,16 @@ class ExpendFragment : BaseFragment<FragmentExpendBinding>(FragmentExpendBinding
         return formatter.format(amount).replace(",", ".")
     }
 
-
-    private fun filterByMonthYear(selectedMonth: Int, selectedYear: Int) {
-
-        if (selectedMonth == 0 || selectedYear == 0) {
-            Toast.makeText(requireContext(), "You are selection month", Toast.LENGTH_SHORT).show()
-            return
-        }
-
-        viewModel.expendList.observe(viewLifecycleOwner) { expendEntities ->
-            val filtered = expendEntities.filter { item ->
-                val (month, year) = extractMonthYear(item.date)
-                item.type == "expend" && month == selectedMonth && year == selectedYear
-            }
-
-            val parentData = viewModel.initData(filtered)
-            parentAdapter.setData(parentData)
-
-            binding.txtTransaction.visibility =
-                if (filtered.isEmpty()) View.VISIBLE else View.GONE
-        }
-    }
-
-
     private fun extractMonthYear(dateString: String): Pair<Int, Int> {
-        val parts = dateString.split("/")
-        val month = parts[1].toInt()
-        val year = parts[2].toInt()
-        return Pair(month, year)
+        return try {
+            val parts = dateString.split("/")
+            if (parts.size >= 3) {
+                Pair(parts[1].toInt(), parts[2].toInt())
+            } else {
+                Pair(0, 0)
+            }
+        } catch (e: Exception) {
+            Pair(0, 0)
+        }
     }
 }
-
-

@@ -49,7 +49,7 @@ class BudgetBottomSheet : BottomSheetDialogFragment() {
         }
 
         binding?.btnNone?.setOnClickListener {
-            selectionBudget = "None"
+            selectionBudget = this.getString(R.string.none)
             img = R.drawable.ic_none
             adapter.clearSelection()
             it.setBackgroundResource(R.drawable.bg_budget_selection)
@@ -60,7 +60,7 @@ class BudgetBottomSheet : BottomSheetDialogFragment() {
                 listener.onClickListenerBudget(selectionBudget, img)
                 dismiss()
             } else {
-                android.widget.Toast.makeText(requireContext(), "Please select a jar", android.widget.Toast.LENGTH_SHORT).show()
+                android.widget.Toast.makeText(requireContext(), this.getString(R.string.please_select_a_jar), android.widget.Toast.LENGTH_SHORT).show()
             }
         }
 

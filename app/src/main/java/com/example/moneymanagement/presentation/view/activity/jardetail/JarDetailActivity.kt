@@ -2,6 +2,7 @@ package com.example.moneymanagement.presentation.view.activity.jardetail
 
 import android.app.AlertDialog
 import androidx.lifecycle.ViewModelProvider
+import com.example.moneymanagement.R
 import com.example.moneymanagement.databinding.ActivityJarDetailBinding
 import com.example.moneymanagement.presentation.Utils
 import com.example.moneymanagement.presentation.database.roomdb.BudgetEntity
@@ -29,9 +30,13 @@ class JarDetailActivity :
         binding.lstTransactions.adapter = transactionAdapter
 
         val data = intent.getStringExtra(Utils.BUDGET_DETAIL.name)
-        val gson = Gson()
-        budgetEntity = gson.fromJson(data, BudgetEntity::class.java)
-        viewModel.getData(this, budgetEntity.imgBudget, budgetEntity.nameBudget)
+        if (data != null) {
+            val gson = Gson()
+            budgetEntity = gson.fromJson(data, BudgetEntity::class.java)
+            viewModel.getData(this, budgetEntity.imgBudget, budgetEntity.nameBudget)
+        } else {
+            finish()
+        }
 
         viewModel.transactions.observe(this) {
             transactionAdapter.setData(it)
@@ -51,26 +56,26 @@ class JarDetailActivity :
     }
 
     override fun bindView() {
+        if (!::budgetEntity.isInitialized) return
 
         val formatMoneyJar = formatMoney(budgetEntity.moneyBudget)
 
         binding.txtTitleJar.text = budgetEntity.nameBudget
         binding.totalMoneyJar.text = "$formatMoneyJar đ"
         binding.imgJar.setImageResource(budgetEntity.imgBudget)
-
-
     }
 
     private fun deleteBudget() {
+        if (!::budgetEntity.isInitialized) return
         val dialog = AlertDialog.Builder(this)
-            .setTitle("Delete Budget")
-            .setMessage("Do you want to delete budget")
-            .setPositiveButton("Delete") { _, _ ->
+            .setTitle(this.getString(R.string.delete_budget))
+            .setMessage(this.getString(R.string.do_you_want_to_delete_budget))
+            .setPositiveButton(this.getString(R.string.delete)) { _, _ ->
                 viewModel.deleteBudget(budgetEntity)
 
                 finish()
             }
-            .setNegativeButton("Cancel", null)
+            .setNegativeButton(this.getString(R.string.cancel), null)
             .create()
 
         dialog.show()

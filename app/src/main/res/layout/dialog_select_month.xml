@@ -21,7 +21,7 @@
             android:layout_marginEnd="8dp"
             android:layout_weight="1"
             android:fontFamily="@font/dms_sand_500"
-            android:text="Select month"
+            android:text="@string/select_month"
             android:textColor="#18181B"
             android:textSize="20sp" />
 
@@ -34,7 +34,7 @@
             android:fontFamily="@font/poppins_500"
             android:paddingHorizontal="12dp"
             android:paddingVertical="8dp"
-            android:text="This month"
+            android:text="@string/this_month"
             android:textColor="#000000"
             android:textSize="14sp" />
     </LinearLayout>
@@ -92,7 +92,7 @@
             android:layout_height="wrap_content"
             android:background="@drawable/bg_btn_cancel_this_month"
             android:fontFamily="@font/urbanist_500"
-            android:text="Cancel"
+            android:text="@string/cancel"
             android:textColor="#18181B"
             android:textSize="13sp"
             app:layout_constraintStart_toStartOf="parent"
@@ -104,7 +104,7 @@
             android:layout_height="wrap_content"
             android:background="@drawable/bg_btn_this_month"
             android:fontFamily="@font/urbanist_500"
-            android:text="Save"
+            android:text="@string/save"
             android:textColor="@color/white"
             android:textSize="13sp"
             app:layout_constraintEnd_toEndOf="parent"

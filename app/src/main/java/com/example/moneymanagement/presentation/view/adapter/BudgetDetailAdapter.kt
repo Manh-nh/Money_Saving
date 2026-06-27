@@ -9,11 +9,17 @@ import java.text.DecimalFormat
 
 class BudgetDetailAdapter(
     private var items: List<BudgetEntity>,
+    private var totalBudget: Int,
     private var onClickUpdateMoney: OnClickListenerUpdateMoney
 ) : RecyclerView.Adapter<BudgetDetailAdapter.ViewHolder>() {
 
     fun setData(newItems: List<BudgetEntity>) {
         this.items = newItems
+        notifyDataSetChanged()
+    }
+
+    fun setTotalBudget(totalBudget: Int) {
+        this.totalBudget = totalBudget
         notifyDataSetChanged()
     }
 
@@ -30,32 +36,16 @@ class BudgetDetailAdapter(
 
     inner class ViewHolder(val binding: ItemBudgetBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bindView(budgetDetail: BudgetEntity) {
-
-            val formatMoney = formatMoney(budgetDetail.moneyBudget)
-
-            binding.txtNameBudget.text = budgetDetail.nameBudget
-            binding.txtMoney.text = "$formatMoney"
-            binding.imgBudget.setImageResource(budgetDetail.imgBudget)
-
-            val moneyJar = binding.txtMoney.text.toString()
-            val formatMoneyJar = moneyJar.replace(".", "")
-            val nameJar = binding.txtNameBudget.text.toString()
-
-            binding.btnUpdateMoney.setOnClickListener {
-                onClickUpdateMoney.getJar(budgetDetail.id, formatMoneyJar.toInt(), nameJar)
-            }
-
-            binding.root.setOnClickListener {
-                onClickUpdateMoney.onItemClick(budgetDetail)
-            }
-
+            binding.jarView.bind(
+                budgetDetail,
+                totalBudget,
+                onEditClick = {
+                    onClickUpdateMoney.getJar(budgetDetail.id, budgetDetail.moneyBudget, budgetDetail.nameBudget)
+                },
+                onItemClick = {
+                    onClickUpdateMoney.onItemClick(budgetDetail)
+                }
+            )
         }
-
-        private fun formatMoney(amount: Int): String {
-            val formatter = DecimalFormat("#,###")
-            return formatter.format(amount).replace(",", ".")
-        }
-
-
     }
 }

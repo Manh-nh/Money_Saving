@@ -19,7 +19,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:fontFamily="@font/urbanist_600"
-            android:text="Cancel"
+            android:text="@string/cancel"
             android:textColor="#2D0D59"
             android:textSize="14sp" />
 
@@ -30,7 +30,7 @@
             android:background="@drawable/bg_btn_add_plus"
             android:backgroundTint="#772DDF"
             android:fontFamily="@font/urbanist_600"
-            android:text="save"
+            android:text="@string/save"
             android:textColor="#FFFFFF"
             android:textSize="14sp" />
     </LinearLayout>

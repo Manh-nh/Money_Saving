@@ -11,7 +11,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/urbanist_600"
-        android:text="Amount"
+        android:text="@string/amount"
         android:textColor="#2D0D59"
         android:textSize="14sp" />
 
@@ -34,7 +34,7 @@
         android:layout_marginTop="16dp"
         android:layout_marginBottom="8dp"
         android:fontFamily="@font/urbanist_600"
-        android:text="Category"
+        android:text="@string/category"
         android:textColor="#2D0D59"
         android:textSize="14sp" />
 
@@ -54,7 +54,7 @@
         android:layout_marginTop="16dp"
         android:layout_marginBottom="8dp"
         android:fontFamily="@font/urbanist_600"
-        android:text="Budget"
+        android:text="@string/budget"
         android:textColor="#2D0D59"
         android:textSize="14sp" />
 
@@ -91,7 +91,7 @@
         android:layout_marginTop="16dp"
         android:layout_marginBottom="16dp"
         android:fontFamily="@font/urbanist_500"
-        android:text="Note"
+        android:text="@string/note"
         android:textColor="#18181B"
         android:textSize="14sp" />
 
@@ -102,7 +102,7 @@
         android:layout_marginBottom="24dp"
         android:background="@drawable/bg_note"
         android:fontFamily="@font/urbanist_500"
-        android:hint="Add a description"
+        android:hint="@string/add_a_description"
         android:textColor="#9D89B8"
         android:textSize="14sp" />
 

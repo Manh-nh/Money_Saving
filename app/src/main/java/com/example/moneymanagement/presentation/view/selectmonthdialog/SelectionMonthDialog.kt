@@ -43,7 +43,7 @@ class SelectionYearPopup(
         setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         viewModel = ViewModelProvider(owner)[SelectionMonthViewModel::class.java]
         shareDateHomeActivity = ViewModelProvider(owner)[HomeViewModel::class.java]
-        data = viewModel.initData()
+        data = viewModel.initData(context)
 
         adapter = MonthAdapter(data, this)
         binding.lstMonth.adapter = adapter

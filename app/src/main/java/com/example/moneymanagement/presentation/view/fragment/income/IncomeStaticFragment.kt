@@ -51,8 +51,19 @@ class IncomeStaticFragment :
 
         // Set default month text
         val calendar = Calendar.getInstance()
-        val monthNames = arrayOf("January", "February", "March", "April", "May", "June",
-            "July", "August", "September", "October", "November", "December")
+        val monthNames = arrayOf(
+            this.getString(R.string.month_january),
+            this.getString(R.string.month_february),
+            this.getString(R.string.month_march),
+            this.getString(R.string.month_april),
+            this.getString(R.string.month_may),
+            this.getString(R.string.month_june),
+            this.getString(R.string.month_july),
+            this.getString(R.string.month_august),
+            this.getString(R.string.month_september),
+            this.getString(R.string.month_october),
+            this.getString(R.string.month_november),
+            this.getString(R.string.month_december),)
         binding.txtMonth.text = "${monthNames[calendar.get(Calendar.MONTH)]} ${calendar.get(Calendar.YEAR)}"
 
         // Observe DB once
@@ -72,7 +83,7 @@ class IncomeStaticFragment :
 
         homeViewModel.selectedMonthYear.observe(viewLifecycleOwner){(month, year , monthFormat) ->
             binding.txtMonth.text = "$monthFormat $year"
-            viewModel.setSelectedDate(month + 1, year)
+            viewModel.setSelectedDate(month, year)
         }
 
     }

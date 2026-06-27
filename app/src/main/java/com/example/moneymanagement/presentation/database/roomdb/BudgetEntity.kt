@@ -10,4 +10,5 @@ data class BudgetEntity (
     val nameBudget : String,
     val moneyBudget : Int = 0,
     val imgBudget: Int,
+    val initialBudget: Int = 0,
 )

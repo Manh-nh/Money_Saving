@@ -19,6 +19,7 @@ class BudgetDetailViewModel : ViewModel() {
     private lateinit var appDatabase: AppDatabase
 
     lateinit var listBudget: LiveData<List<BudgetEntity>>
+    lateinit var overallBudget: LiveData<com.example.moneymanagement.presentation.database.roomdb.MoneyBudgetEntity>
 
     private var _money = MutableLiveData<Int>()
     val money: LiveData<Int> get() = _money
@@ -26,21 +27,22 @@ class BudgetDetailViewModel : ViewModel() {
     fun setAppDataBase(appDatabase: AppDatabase) {
         this.appDatabase = appDatabase
         listBudget = appDatabase.addBudget().getBudgetDetail()
+        overallBudget = appDatabase.setMoney().getMoney()
     }
 
-    fun initData() {
+    fun initData(context : Context) {
         CoroutineScope(Dispatchers.IO).launch {
 
             val count = appDatabase.addBudget().countJar()
 
             if (count == 0) {
                 val budgetName = listOf(
-                    BudgetEntity(1, "Necessities", 0, R.drawable.ic_necessities),
-                    BudgetEntity(2, "Education", 0, R.drawable.ic_education_budget),
-                    BudgetEntity(3, "Saving", 0, R.drawable.ic_saving_budget),
-                    BudgetEntity(4, "Play", 0, R.drawable.ic_play_budget),
-                    BudgetEntity(5, "Investment", 0, R.drawable.ic_investment_budget),
-                    BudgetEntity(6, "Give", 0, R.drawable.ic_give_budget),
+                    BudgetEntity(1, context.getString(R.string.necessities), 0, R.drawable.ic_necessities),
+                    BudgetEntity(2, context.getString(R.string.education), 0, R.drawable.ic_education_budget),
+                    BudgetEntity(3, context.getString(R.string.saving), 0, R.drawable.ic_saving_budget),
+                    BudgetEntity(4, context.getString(R.string.play), 0, R.drawable.ic_play_budget),
+                    BudgetEntity(5, context.getString(R.string.investment), 0, R.drawable.ic_investment_budget),
+                    BudgetEntity(6, context.getString(R.string.give), 0, R.drawable.ic_give_budget),
 
                     )
 
@@ -54,18 +56,31 @@ class BudgetDetailViewModel : ViewModel() {
     fun updateMoney(id: Int, newMoney: Int, context: Context) {
         CoroutineScope(Dispatchers.IO).launch {
 
-            val maxMoney = appDatabase.setMoney().getMoneyNow().moneyBudget
+            val budgetEntity = appDatabase.setMoney().getMoneyNow()
+            val maxMoney = budgetEntity?.moneyBudget ?: 0
 
-            if (newMoney < maxMoney) {
-                appDatabase.addBudget().updateMoney(id, newMoney)
+            if (budgetEntity == null || maxMoney == 0) {
                 withContext(Dispatchers.Main) {
-                    Toast.makeText(context, "update success", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(
+                        context,
+                        context.getString(R.string.please_set_the_overall_budget_first),
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
+                return@launch
+            }
+
+            if (newMoney <= maxMoney) {
+                appDatabase.addBudget().updateInitialAndCurrentMoney(id, newMoney, newMoney)
+                recalculateBalances()
+                withContext(Dispatchers.Main) {
+                    Toast.makeText(context, context.getString(R.string.update_success), Toast.LENGTH_SHORT).show()
                 }
             } else {
                 withContext(Dispatchers.Main) {
                     Toast.makeText(
                         context,
-                        "The jar balance must not exceed the overall budget.",
+                        context.getString(R.string.the_jar_balance_must_not_exceed_the_overall_budget),
                         Toast.LENGTH_SHORT
                     ).show()
                 }
