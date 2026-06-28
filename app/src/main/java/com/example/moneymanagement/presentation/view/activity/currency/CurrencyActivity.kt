@@ -22,6 +22,31 @@ class CurrencyActivity : BaseActivity<ActivityCurrencyBinding>(ActivityCurrencyB
     override fun initializeEvents() {
         binding.ivBack.setOnClickListener { finish() }
 
+        binding.edtAmount.addTextChangedListener(object : android.text.TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
+            override fun afterTextChanged(s: android.text.Editable?) {
+                binding.edtAmount.removeTextChangedListener(this)
+                try {
+                    var originalString = s.toString()
+                    if (originalString.contains(".")) {
+                        originalString = originalString.replace(".", "")
+                    }
+                    val longval: Long = originalString.toLong()
+                    val symbols = java.text.DecimalFormatSymbols(java.util.Locale.US)
+                    symbols.groupingSeparator = '.'
+                    val formatter = java.text.DecimalFormat("#,###", symbols)
+                    val formattedString: String = formatter.format(longval)
+
+                    binding.edtAmount.setText(formattedString)
+                    binding.edtAmount.setSelection(binding.edtAmount.text.length)
+                } catch (nfe: NumberFormatException) {
+                    nfe.printStackTrace()
+                }
+                binding.edtAmount.addTextChangedListener(this)
+            }
+        })
+
         binding.btnFromCurrency.setOnClickListener {
             showCurrencySelector(fromCurrencyCode) { currency ->
                 fromCurrencyCode = currency.code
@@ -70,7 +95,7 @@ class CurrencyActivity : BaseActivity<ActivityCurrencyBinding>(ActivityCurrencyB
             return
         }
 
-        val amount = amountStr.toDoubleOrNull() ?: 0.0
+        val amount = amountStr.replace(".", "").toDoubleOrNull() ?: 0.0
 
         binding.btnConvert.isEnabled = false
         binding.btnConvert.text = getString(R.string.converting)
