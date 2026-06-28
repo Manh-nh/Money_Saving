@@ -22,7 +22,7 @@ class TransactionsViewModel : ViewModel() {
         CoroutineScope(Dispatchers.IO).launch {
             val transaction = dao.getById(id)
             if (transaction != null) {
-                val budget = appDatabase.addBudget().getBudgetById(transaction.imgBudget)
+                val budget = appDatabase.addBudget().getBudgetByName(transaction.nameBudget)
                 if (budget != null) {
                     val reversedMoney = when (transaction.type) {
                         "expend" -> budget.moneyBudget + transaction.amount

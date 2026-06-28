@@ -34,6 +34,9 @@ interface AddBudgetDetailDao {
     @Query("SELECT * FROM BudgetEntity WHERE imgBudget = :imgBudgetId LIMIT 1")
     suspend fun getBudgetById(imgBudgetId: Int): BudgetEntity?
 
+    @Query("SELECT * FROM BudgetEntity WHERE nameBudget = :name LIMIT 1")
+    suspend fun getBudgetByName(name: String): BudgetEntity?
+
     @Query("SELECT * FROM BudgetEntity")
     suspend fun getBudgetDetailSync(): List<BudgetEntity>
 }

@@ -33,7 +33,7 @@ class JarDetailActivity :
         if (data != null) {
             val gson = Gson()
             budgetEntity = gson.fromJson(data, BudgetEntity::class.java)
-            viewModel.getData(this, budgetEntity.imgBudget, budgetEntity.nameBudget)
+            viewModel.getData(this, budgetEntity.nameBudget)
         } else {
             finish()
         }

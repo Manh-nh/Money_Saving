@@ -28,11 +28,11 @@ class JarDetailViewModel : ViewModel() {
         }
     }
 
-    fun getData(owner: LifecycleOwner, imgBudget: Int, nameBudget: String) {
+    fun getData(owner: LifecycleOwner, nameBudget: String) {
 
         appDatabase.addNewDao().getAll().observe(owner) { entities ->
             val jarType = entities.filter { 
-                it.nameBudget == nameBudget || it.imgBudget == imgBudget
+                it.nameBudget == nameBudget
             }
 
             _transactions.postValue(jarType)

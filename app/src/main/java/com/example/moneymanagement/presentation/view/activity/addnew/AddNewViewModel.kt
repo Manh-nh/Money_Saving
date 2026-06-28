@@ -61,7 +61,7 @@ class AddNewViewModel : ViewModel() {
             appDatabase.addNewDao().insertExpend(entity)
             
             // Sync with Budget Jar
-            val budget = appDatabase.addBudget().getBudgetById(imgBudget)
+            val budget = appDatabase.addBudget().getBudgetByName(nameBudget)
             if (budget != null) {
                 val newMoney = when (type) {
                     "expend" -> budget.moneyBudget - amountExpend
