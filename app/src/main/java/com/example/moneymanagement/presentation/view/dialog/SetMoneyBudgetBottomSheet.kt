@@ -22,6 +22,30 @@ class SetMoneyBudgetBottomSheet : BottomSheetDialogFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        binding?.edtSetMoney?.addTextChangedListener(object : android.text.TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
+            override fun afterTextChanged(s: android.text.Editable?) {
+                binding?.edtSetMoney?.removeTextChangedListener(this)
+                try {
+                    var originalString = s.toString()
+                    if (originalString.contains(".")) {
+                        originalString = originalString.replace(".", "")
+                    }
+                    val longval: Long = originalString.toLong()
+                    val symbols = java.text.DecimalFormatSymbols(java.util.Locale.US)
+                    symbols.groupingSeparator = '.'
+                    val formatter = java.text.DecimalFormat("#,###", symbols)
+                    val formattedString: String = formatter.format(longval)
+
+                    binding?.edtSetMoney?.setText(formattedString)
+                    binding?.edtSetMoney?.setSelection(binding?.edtSetMoney?.text?.length ?: 0)
+                } catch (nfe: NumberFormatException) {
+                    nfe.printStackTrace()
+                }
+                binding?.edtSetMoney?.addTextChangedListener(this)
+            }
+        })
 
         binding?.btnSave?.setOnClickListener {
             val setMoney = binding?.edtSetMoney?.text.toString()
@@ -31,7 +55,7 @@ class SetMoneyBudgetBottomSheet : BottomSheetDialogFragment() {
                 return@setOnClickListener
             }
 
-            val amount = setMoney.toInt()
+            val amount = setMoney.replace(".", "").toIntOrNull() ?: 0
 
             if (amount < 0) {
                 Toast.makeText(requireContext(), this.getString(R.string.money_is_less_than_0), Toast.LENGTH_SHORT).show()

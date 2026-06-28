@@ -36,8 +36,34 @@ class SetMoneyJarBottomSheet(
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding?.edtSetMoney?.setText(money.toString())
+        val symbols = java.text.DecimalFormatSymbols(java.util.Locale.US)
+        symbols.groupingSeparator = '.'
+        val formatter = java.text.DecimalFormat("#,###", symbols)
+        val formattedMoney = formatter.format(money)
+        binding?.edtSetMoney?.setText(formattedMoney)
         binding?.txtBudget?.text = jarName
+
+        binding?.edtSetMoney?.addTextChangedListener(object : android.text.TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
+            override fun afterTextChanged(s: android.text.Editable?) {
+                binding?.edtSetMoney?.removeTextChangedListener(this)
+                try {
+                    var originalString = s.toString()
+                    if (originalString.contains(".")) {
+                        originalString = originalString.replace(".", "")
+                    }
+                    val longval: Long = originalString.toLong()
+                    val formattedString: String = formatter.format(longval)
+
+                    binding?.edtSetMoney?.setText(formattedString)
+                    binding?.edtSetMoney?.setSelection(binding?.edtSetMoney?.text?.length ?: 0)
+                } catch (nfe: NumberFormatException) {
+                    nfe.printStackTrace()
+                }
+                binding?.edtSetMoney?.addTextChangedListener(this)
+            }
+        })
 
         binding?.btnSave?.setOnClickListener {
             val getMoney = binding?.edtSetMoney?.text.toString().trim()
@@ -51,7 +77,7 @@ class SetMoneyJarBottomSheet(
                 return@setOnClickListener
             }
 
-            val parsedMoney = getMoney.toIntOrNull()
+            val parsedMoney = getMoney.replace(".", "").toIntOrNull()
             if (parsedMoney == null || parsedMoney < 1000) {
                 Toast.makeText(
                     requireContext(),
