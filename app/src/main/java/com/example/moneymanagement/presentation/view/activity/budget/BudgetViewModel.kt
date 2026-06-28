@@ -30,11 +30,47 @@ class BudgetViewModel : ViewModel() {
         }
     }
 
+    private val _resetEvent = MutableLiveData<Boolean>()
+    val resetEvent: LiveData<Boolean> get() = _resetEvent
+
     fun updateMoney(money : Int){
 
         CoroutineScope(Dispatchers.IO).launch {
+            val jars = appDatabase.addBudget().getBudgetDetailSync()
+            val totalAllocated = jars.sumOf { it.initialBudget }
+
+            var didReset = false
+            if (money < totalAllocated) {
+                appDatabase.addBudget().resetAllJarsBudgets()
+                recalculateBalances()
+                didReset = true
+            }
+
             val entity = MoneyBudgetEntity(id = 1, moneyBudget = money)
             appDatabase.setMoney().insertOrUpdate(entity)
+            _resetEvent.postValue(didReset)
+        }
+    }
+
+    private suspend fun recalculateBalances() {
+        val transactions = appDatabase.addNewDao().getAllSync()
+        val jars = appDatabase.addBudget().getBudgetDetailSync()
+
+        jars.forEach { jar ->
+            val jarTransactions = transactions.filter { it.nameBudget == jar.nameBudget }
+            var balance = jar.initialBudget
+
+            jarTransactions.forEach { trans ->
+                when (trans.type) {
+                    "expend" -> balance -= trans.amount
+                    "income" -> balance += trans.amount
+                    "loan" -> {
+                        if (trans.nameTypeCategory == "Loan") balance += trans.amount
+                        else if (trans.nameTypeCategory == "Borrow") balance -= trans.amount
+                    }
+                }
+            }
+            appDatabase.addBudget().updateMoney(jar.id, balance)
         }
     }
 

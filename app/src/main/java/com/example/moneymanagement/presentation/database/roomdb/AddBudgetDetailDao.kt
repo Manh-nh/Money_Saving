@@ -37,6 +37,9 @@ interface AddBudgetDetailDao {
     @Query("SELECT * FROM BudgetEntity WHERE nameBudget = :name LIMIT 1")
     suspend fun getBudgetByName(name: String): BudgetEntity?
 
+    @Query("UPDATE BudgetEntity SET initialBudget = 0, moneyBudget = 0")
+    suspend fun resetAllJarsBudgets()
+
     @Query("SELECT * FROM BudgetEntity")
     suspend fun getBudgetDetailSync(): List<BudgetEntity>
 }
