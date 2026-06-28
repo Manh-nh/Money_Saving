@@ -75,11 +75,12 @@ class BudgetActivity : BaseActivity<ActivityBudgetBinding>(ActivityBudgetBinding
             calculateBudgetPercent()
             progressBar()
         }
-        viewModel.resetEvent.observe(this) { didReset ->
-            if (didReset) {
+        viewModel.validationError.observe(this) { totalAllocated ->
+            if (totalAllocated != null) {
+                val formattedAllocated = formatMoney(totalAllocated)
                 android.widget.Toast.makeText(
                     this,
-                    "Your jar allocations have been reset to 0 because the new overall budget is lower than previous allocations.",
+                    "Cannot set overall budget lower than total allocated money (currently $formattedAllocated đ). Please reduce money in your jars first.",
                     android.widget.Toast.LENGTH_LONG
                 ).show()
             }

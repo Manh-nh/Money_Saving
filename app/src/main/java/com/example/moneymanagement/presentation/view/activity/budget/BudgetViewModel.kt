@@ -30,8 +30,8 @@ class BudgetViewModel : ViewModel() {
         }
     }
 
-    private val _resetEvent = MutableLiveData<Boolean>()
-    val resetEvent: LiveData<Boolean> get() = _resetEvent
+    private val _validationError = MutableLiveData<Int?>()
+    val validationError: LiveData<Int?> get() = _validationError
 
     fun updateMoney(money : Int){
 
@@ -39,38 +39,13 @@ class BudgetViewModel : ViewModel() {
             val jars = appDatabase.addBudget().getBudgetDetailSync()
             val totalAllocated = jars.sumOf { it.initialBudget }
 
-            var didReset = false
             if (money < totalAllocated) {
-                appDatabase.addBudget().resetAllJarsBudgets()
-                recalculateBalances()
-                didReset = true
+                _validationError.postValue(totalAllocated)
+            } else {
+                val entity = MoneyBudgetEntity(id = 1, moneyBudget = money)
+                appDatabase.setMoney().insertOrUpdate(entity)
+                _validationError.postValue(null)
             }
-
-            val entity = MoneyBudgetEntity(id = 1, moneyBudget = money)
-            appDatabase.setMoney().insertOrUpdate(entity)
-            _resetEvent.postValue(didReset)
-        }
-    }
-
-    private suspend fun recalculateBalances() {
-        val transactions = appDatabase.addNewDao().getAllSync()
-        val jars = appDatabase.addBudget().getBudgetDetailSync()
-
-        jars.forEach { jar ->
-            val jarTransactions = transactions.filter { it.nameBudget == jar.nameBudget }
-            var balance = jar.initialBudget
-
-            jarTransactions.forEach { trans ->
-                when (trans.type) {
-                    "expend" -> balance -= trans.amount
-                    "income" -> balance += trans.amount
-                    "loan" -> {
-                        if (trans.nameTypeCategory == "Loan") balance += trans.amount
-                        else if (trans.nameTypeCategory == "Borrow") balance -= trans.amount
-                    }
-                }
-            }
-            appDatabase.addBudget().updateMoney(jar.id, balance)
         }
     }
 
